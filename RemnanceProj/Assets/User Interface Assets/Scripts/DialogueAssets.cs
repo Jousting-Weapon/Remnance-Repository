@@ -10,8 +10,6 @@ public static class DialogueAssets
     public static readonly string[] tutorial_c1a_tree = { "Can you adjust them remotely? (Begin Tutorial)", "I’ve done this before, I can calibrate them myself. (Skip Tutorial)" };
     public static readonly string[] tutorial_c1a_subtitles = { "PLAYER: Okay, great. Can you adjust them remotely?", "PLAYER: I’ve done this before, I can calibrate them myself." };
 
-    // If option 1 is taken go to TREE 2. If option 2 is taken go to tutorial_c1b_tree
-
     // TREE 2
     public static readonly string[] tutorial_c1a_tree_2_subtitles = { "HANDLER: You bet, one moment...", "HANDLER: Okay you should be all good to go. Try moving around for me.", "HANDLER: Great. All of your motor information is coming in clear on my end. You ready to get to work?", };
     public static readonly string[] tutorial_gameDisplay_2 = { "Use ‘W,’ ‘A,’ ‘S,’ and ‘D’ for movement." };

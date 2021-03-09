@@ -263,7 +263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10.267792, y: -4.25}
+  m_AnchoredPosition: {x: -10.267822, y: -4.25}
   m_SizeDelta: {x: -20.535557, y: 8.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569729501
@@ -1646,7 +1646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: -43.5}
+  m_AnchoredPosition: {x: 0, y: -125}
   m_SizeDelta: {x: 1142.8676, y: 185.5371}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3999208725172514358
@@ -1678,7 +1678,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 162d163a770f6b042a8a3220aa11464a, type: 3}
     m_FontSize: 40
     m_FontStyle: 1
     m_BestFit: 0
@@ -1966,7 +1966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.37686, y: 159.21951}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 1179.9982, y: 188.545}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3999208726142643450
@@ -2143,7 +2143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3999208726377704631}
   m_Layer: 0
-  m_Name: Canvas Handler
+  m_Name: Dialogue Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2157,7 +2157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3999208726377704630}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -66.42856, y: -100.59524, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 3999208725172514357}
@@ -2581,7 +2581,7 @@ GameObject:
   - component: {fileID: 7580119263628629637}
   - component: {fileID: 7580119263628629638}
   m_Layer: 0
-  m_Name: DialogueManager
+  m_Name: DialogueManager old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
