@@ -708,6 +708,7 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 0
+  gameManager: {fileID: 0}
 --- !u!1 &941585496
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +933,7 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 0
+  gameManager: {fileID: 0}
 --- !u!1001 &1436587670
 PrefabInstance:
   m_ObjectHideFlags: 0
