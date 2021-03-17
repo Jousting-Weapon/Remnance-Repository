@@ -16,14 +16,14 @@ public static class DialogueAssets
     public static readonly string[] subtitle_tutorial_post_choice_1_tree_1 = { "HANDLER: Great. All of your motor information is coming in clear on my end. You ready to get to work?" };
 
     public static readonly string[] choice_tutorial_tree_1_a = { "I think my neck seal is still locked. Can you do anything about that? (Continue Tutorial)", "Yeah let’s do it. (End Tutorial)" };
-    public static readonly string[] subtitle_tutorial_tree_1_a_c_1 = { "I think my neck seal is still locked. Anything you can do about that?" };
+    public static readonly string[] subtitle_tutorial_tree_1_a_c_1 = { "I think my neck seal is still locked. Can you do something about that?" };
     public static readonly string[] subtitle_tutorial_tree_1_a_c_2 = { "Yeah let’s do it." };
 
     public static readonly string[] subtitle_tutorial_pre_choice_1_tree_1_a = { "Ahh my bad. Forgot about that one.", "Try looking around...now." };
     public static readonly string gameDisplay_tutorial_4 = "Use the mouse to look around.";
     public static readonly string[] subtitle_tutorial_post_choice_1_tree_1_a = { "Okay. I think I'm all set." };
 
-    public static readonly string[] subtitle_tutorial_end_tree = { "Where am I going?" , "Uh... okay, got it. Relic Site 1 should be just up ahead." };
+    public static readonly string[] subtitle_tutorial_end_tree = { "Where am I going?" , "Uh...Relic Site 1 should be just up ahead." };
 
     // Audio
     public static readonly AudioClip clip_sandstorm = Resources.Load<AudioClip>("sandstorm_folie");
