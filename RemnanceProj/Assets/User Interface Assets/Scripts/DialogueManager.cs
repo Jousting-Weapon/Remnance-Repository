@@ -11,7 +11,6 @@ public class DialogueManager : MonoBehaviour
     private const int MOUSE_INPUT = 2;
     private const int WASD_INPUT = 60;
 
-    private const float fontToPixelRatio = 4 / 3;
     private float charSize;
     private int maxCharsPerLine;
     private int selectionBoxPadding;
@@ -22,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     private Transform selectedChoiceBackground;
     private TextMeshProUGUI choicesText;
     private Transform scrollBar;
+    private Transform closeText;
 
     private int userInputFlag;
     private int requiredInput;
@@ -44,6 +44,10 @@ public class DialogueManager : MonoBehaviour
 
     private bool isWristCommActive;
 
+    private float nodeTimer;
+
+    private bool inEntrance;
+
     /// <summary>
     /// A dictionary whose keys are the indexes of the choices and whose values are the number of lines before it
     /// </summary>
@@ -62,6 +66,8 @@ public class DialogueManager : MonoBehaviour
         selectedChoiceBackground = dialogChoicesTransform.GetChild(0);
         choicesText = dialogChoicesTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
         scrollBar = dialogChoicesTransform.GetChild(2);
+        closeText = dialogChoicesTransform.GetChild(3);
+        closeText.gameObject.SetActive(false);
 
         userInputFlag = 0;
         requiredInput = 0;
@@ -84,6 +90,9 @@ public class DialogueManager : MonoBehaviour
         doneFading = false;
 
         isWristCommActive = false;
+
+        nodeTimer = 0;
+        inEntrance = false;
 
         currentChoices = new Dictionary<int, int>();
 
@@ -143,10 +152,33 @@ public class DialogueManager : MonoBehaviour
                 timer -= Time.deltaTime;
             }
         }
+
+        if (currentNode is TimerNode)
+        {
+            if (nodeTimer <= 0)
+            {
+                // Populate choices
+                currentNode = null;
+                nodeTimer = 0;
+                gameDisplayText.text = "";
+            }
+            else
+            {
+                nodeTimer -= Time.deltaTime;
+            }
+        }
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
+        {
+            inEntrance = true;
+            waitingForInput = false;
+            selectedChoice = 0;
+            currentNode = CreateSiteEntranceDialogueTree();
+        }
+
         if (inTutorial && waitingForInput)
         {
             if (Input.GetKeyDown(KeyCode.Q))
@@ -255,6 +287,63 @@ public class DialogueManager : MonoBehaviour
             DisplayNextSentence();
             userInputFlag = 0;
         }
+
+        if (!inTutorial && !inEntrance)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (isWristCommActive)
+                {
+                    if (selectedChoice == -1)
+                    {
+                        dialogChoicesTransform.gameObject.SetActive(false);
+                        isWristCommActive = false;
+                    }
+                    else
+                    { 
+                        // Change current node
+                    }
+                }
+                else
+                {
+                    dialogChoicesTransform.gameObject.SetActive(true);
+                    closeText.gameObject.SetActive(true);
+                    isWristCommActive = true;
+                }
+            }
+
+            if (Input.mouseScrollDelta.y > 0 && isWristCommActive)
+            {
+                if (choices.Length == 0)
+                {
+                    selectedChoice = -1;
+                    UpdateSelectionBackground();
+                }
+                else if (selectedChoice == -1)
+                {
+                    selectedChoice = choices.Length - 1;
+                    UpdateSelectionBackground();
+                }
+                else
+                {
+                    selectedChoice--;
+                    UpdateSelectionBackground();
+                }
+            }
+            else if (Input.mouseScrollDelta.y < 0 && isWristCommActive)
+            {
+                if (choices.Length == 0 || selectedChoice + 1 == choices.Length)
+                {
+                    selectedChoice = -1;
+                    UpdateSelectionBackground();
+                }
+                else
+                {
+                    selectedChoice = selectedChoice + 1;
+                    UpdateSelectionBackground();
+                }
+            }
+        }
     }
 
 
@@ -286,6 +375,16 @@ public class DialogueManager : MonoBehaviour
 
         int verticalPadding = 5;
 
+        if (selectedChoice == -1)
+        {
+            selectedChoiceBackground.transform.localPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, closeText.GetComponent<RectTransform>().localPosition.y, 0);
+
+            selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (int)((closeText.GetComponent<TextMeshProUGUI>().text.Length * charSize) + 2 * selectionBoxPadding));
+            selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, closeText.GetComponent<TextMeshProUGUI>().textInfo.lineInfo[0].lineHeight + verticalPadding);
+
+            return;
+        }
+
         int tempIndex = currentChoices[selectedChoice];
         float tempHeight = choicesText.textInfo.lineInfo[tempIndex].lineHeight + verticalPadding;
         int curLength = choices[selectedChoice].Length - choicesText.textInfo.lineInfo[tempIndex].characterCount;
@@ -311,6 +410,8 @@ public class DialogueManager : MonoBehaviour
 
         selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, tempWidth);
         selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, tempHeight);
+
+        //iTween.MoveTo(textBackground, new Vector3(375, -1 * backgroundHeight * currentChoices[selectedChoiceIndex] + 240, 0), 1);
     }
 
     void DisplayNextSentence()
@@ -339,7 +440,7 @@ public class DialogueManager : MonoBehaviour
                 isWristCommActive = true;
             }
         }
-        else
+        else if (currentNode is DialogueNode)
         {
             gameDisplayText.text = "";
             dialogChoicesTransform.gameObject.SetActive(false);
@@ -352,6 +453,11 @@ public class DialogueManager : MonoBehaviour
             if (temp == null)
             {
                 currentNode = currentNode.GetNextChild(selectedChoice);
+
+                if (currentNode is TimerNode)
+                {
+                    DisplayNextSentence();
+                }
             }
             else
             {
@@ -360,6 +466,20 @@ public class DialogueManager : MonoBehaviour
                 audioSource.Play();
                 timer = temp.Item2.length;
             }
+        }
+        else
+        {
+            subtitlesText.text = "";
+
+            TimerNode node = (TimerNode)currentNode;
+
+            Tuple<string, float> temp = node.GetDisplayTime();
+            gameDisplayText.text = temp.Item1;
+            nodeTimer = temp.Item2;
+            timer = temp.Item2;
+            inEntrance = false;
+            selectedChoice = -1;
+            UpdateSelectionBackground();
         }
     }
 
@@ -475,6 +595,26 @@ public class DialogueManager : MonoBehaviour
 
         return subtitle_initial_node;
     }
+
+    static TreeNode CreateSiteEntranceDialogueTree()
+    {
+        DialogueNode subtitle_entrance_node_1 = new DialogueNode(DialogueAssets.subtitle_entrance_1, DialogueAssets.clip_entrance_1, DialogueAssets.clip_entrance_2);
+        DialogueNode subtitle_entrance_node_2 = new DialogueNode(DialogueAssets.subtitle_entrance_2, DialogueAssets.clip_entrance_3, DialogueAssets.clip_entrance_4, DialogueAssets.clip_entrance_5);
+        DialogueNode subtitle_entrance_node_3 = new DialogueNode(DialogueAssets.subtitle_entrance_3, DialogueAssets.clip_entrance_6, DialogueAssets.clip_entrance_7, DialogueAssets.clip_entrance_8);
+        DialogueNode subtitle_entrance_node_4 = new DialogueNode(DialogueAssets.subtitle_entrance_4, DialogueAssets.clip_entrance_9, DialogueAssets.clip_entrance_10);
+        DialogueNode subtitle_entrance_node_5 = new DialogueNode(DialogueAssets.subtitle_entrance_5, DialogueAssets.clip_entrance_11, DialogueAssets.clip_entrance_12);
+        DialogueNode subtitle_entrance_node_6 = new DialogueNode(DialogueAssets.subtitle_entrance_6, DialogueAssets.clip_entrance_13, DialogueAssets.clip_entrance_14);
+        TimerNode gameDisplay_entrance_1_node = new TimerNode(DialogueAssets.gameDisplay_entrance_1, 5);
+
+        subtitle_entrance_node_1.SetChildren(subtitle_entrance_node_2);
+        subtitle_entrance_node_2.SetChildren(subtitle_entrance_node_3);
+        subtitle_entrance_node_3.SetChildren(subtitle_entrance_node_4);
+        subtitle_entrance_node_4.SetChildren(subtitle_entrance_node_5);
+        subtitle_entrance_node_5.SetChildren(subtitle_entrance_node_6);
+        subtitle_entrance_node_6.SetChildren(gameDisplay_entrance_1_node);
+
+        return subtitle_entrance_node_1;
+    }
 }
 
 abstract class TreeNode
@@ -558,5 +698,22 @@ class PromptNode : TreeNode
     public string[] GetChoices()
     {
         return choices;
+    }
+}
+
+class TimerNode : TreeNode
+{
+    private string displayText;
+    private float timeBeforeDisappear;
+
+    public TimerNode(string text, float time)
+    {
+        displayText = text;
+        timeBeforeDisappear = time;
+    }
+
+    public Tuple<string, float> GetDisplayTime()
+    {
+        return new Tuple<string, float>(displayText, timeBeforeDisappear);
     }
 }
