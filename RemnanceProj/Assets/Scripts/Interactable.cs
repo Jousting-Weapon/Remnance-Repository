@@ -6,6 +6,8 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public bool isInRange;
+    public bool cameraOut;
+
     public KeyCode interactKey;
     public UnityEvent interactAction;
 
