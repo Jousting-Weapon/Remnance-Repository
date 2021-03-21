@@ -15,6 +15,7 @@ public class Interactable : MonoBehaviour
     void Update()
     {
         if(isInRange)
+        if(isInRange && GameObject.Find("OldCamera").GetComponent<Equipment>().cameraOutCount == 77)
         {
             if(Input.GetKeyDown(interactKey))
             {
