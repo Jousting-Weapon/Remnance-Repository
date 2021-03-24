@@ -20,10 +20,9 @@ public class Patrolling : MonoBehaviour{
    {
        agent.destination = points[current].position;
        if (agent.transform.position == points[current].position)
-       {
+        {
            current = (current + 1) % points.Length;
            agent.destination = points[current].position;
-       }
+        }
    }
-
-}      
+}

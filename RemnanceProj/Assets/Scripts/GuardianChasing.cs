@@ -1,19 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class GuardianSight : MonoBehaviour
+public class GuardianChasing : MonoBehaviour
 {
+    public Transform[] points;
+    int current;
+    private UnityEngine.AI.NavMeshAgent agent;
     public GameManager gameManager;
     public bool isChasing = false;
-    public NavMeshAgent agent;
     public GameObject player;
-    
+    //public Transform playerpos;
+
     void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
-        player = GameObject.Find("First Person Player");
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        player = GameObject.Find("Player");
+        //playerpos = player.GetComponent<CharacterController>().transform.position;
+    }
+
+    void Start()
+    {
+
+    }
+    
+    void Update()
+    {
+       RaycastCheck();
+
+       if (isChasing)
+        {
+            Chasing();
+        }
     }
 
     private void RaycastCheck()
@@ -36,20 +54,9 @@ public class GuardianSight : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        RaycastCheck();
-
-        if (isChasing)
-        {
-            Chasing();
-        }
-    }
-     
     public void Chasing()
     {
-        agent.speed = 400;
-        agent.destination = player.transform.position;
-
+        //agent.destination = playerpos;
+        Debug.Log("is chasing");
     }
 }

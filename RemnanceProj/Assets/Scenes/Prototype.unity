@@ -1212,6 +1212,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7438232540060513243, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
+      propertyPath: m_Size.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438232540060513243, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
+      propertyPath: m_Size.z
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438232540060513243, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
+      propertyPath: m_Center.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438232540060513243, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
+      propertyPath: m_Center.z
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7672981876120299281, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
       propertyPath: m_Name
       value: Guardian_2
@@ -1488,6 +1504,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7672981876120299281, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
   m_PrefabInstance: {fileID: 5838416826037664348}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &840334051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840334046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d0fcb3b43ee4d4eb7e261a71c1cc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!114 &840334052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1500,10 +1529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8317afa75e4174aabdcbaf42b11581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ground:
-    serializedVersion: 2
-    m_Bits: 0
   gameManager: {fileID: 0}
+  isChasing: 0
+  agent: {fileID: 0}
+  player: {fileID: 580629736}
 --- !u!1 &941585496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1821,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7672981876120299281, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
   m_PrefabInstance: {fileID: 617849284}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1369859804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369859799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d0fcb3b43ee4d4eb7e261a71c1cc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!114 &1369859805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,10 +1846,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8317afa75e4174aabdcbaf42b11581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ground:
-    serializedVersion: 2
-    m_Bits: 0
   gameManager: {fileID: 0}
+  isChasing: 0
+  agent: {fileID: 0}
+  player: {fileID: 580629736}
 --- !u!1001 &1436587670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3387,12 +3429,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7438232540060513243, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
+      propertyPath: m_Size.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438232540060513243, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
+      propertyPath: m_Size.z
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438232540060513243, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
+      propertyPath: m_Center.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438232540060513243, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
+      propertyPath: m_Center.z
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7672981876120299281, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
       propertyPath: m_Name
       value: Guardian_1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5838416827570681416, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0eeaf3c54acaed74fbffa3a7581cf357, type: 3}
 --- !u!4 &7286020989854845906
 Transform:
