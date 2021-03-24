@@ -82,4 +82,43 @@ public static class DialogueAssets
     public static readonly AudioClip clip_entrance_13 = Resources.Load<AudioClip>("Remnance_Scene_2_Clip_13");
     public static readonly AudioClip clip_entrance_14 = Resources.Load<AudioClip>("Remnance_Scene_2_Clip_14");
     #endregion
+
+    #region Exploration
+    public static readonly string[] choice_exploration_tree_1 = { "Relic Guardians?", "Can I document these buildings?" };
+
+    public static readonly string[] subtitle_exploration_tree_1_c1 = { "PLAYER: The briefing said there were no other sentients on Halcian III. What are those things?", "HANDLER: The briefing said there were no other organics on Halcian III. Those \"robots\" that you're either hearing or seeing float around, those are Relic Guardians", "HANDLER: I'm surprised you haven't seen any on other assignments. One of the teams on H2 said they ran into a ton of them." };
+    public static readonly string[] choice_exploration_tree_2 = { "Are they dangerous?", "Is there any way to shut them down?" };
+    public static readonly string[] subtitle_exploration_tree_2_c1 = { "PLAYER: Are they...dangerous?", "HANDLER: Oh absolutely. That team on H2 said they ran into them. As in past tense.", "HANDLER: There's a reason I'm not down there with you. Sorry. I probably should have mentioned that earlier.", "PLAYER: Ya think?" };
+    public static readonly string[] subtitle_exploration_tree_2_c2_a = { "PLAYER: Is there anyway to shut them down or disable them?", "HANDLER: With what, your camera? Unless you're carrying some contraband I don't know about, which is saying something because I have access to literally every piece of equipment you're wearing, that sounds like a terrible plan." };
+    public static readonly string[] subtitle_exploration_tree_2_c2_b = { "PLAYER: I don't see you coming up with any better ideas.", "HANDLER: Well, I'm not the one down there, unarmed mind you, trying to pick a fight with a bunch of alien robots.", "PLAYER: Evidently." };
+
+    public static readonly string[] subtitle_exploration_tree_1_c2_a = { "PLAYER: What's S.A.L.V.A.G.E.'s policy on building documentation?", "HANDLER: Building documentation? As in taking pictures of run down houses?" };
+    public static readonly string[] subtitle_exploration_tree_1_c2_b = { "PLAYER: Yeah. Some of these structures may have been here for decades. Between the sharp winds and these sandstorms, I'm surprised they're not already buried.", "PLAYER: A few years ago, during one of my assignments in the Asar System, we were able to catalog nearly every building with a structural integrity above 30%.", "PLAYER: By the time the mission was over, we had begun to discern patterns between the layouts of all the buildings.", "PLAYER: Larger structures, likely used for sanitation, had been placed away from the smaller houses that we assumed were for residential purposes.", "PLAYER: Through just documenting the structures, our team concluded that this civilization had mastered zoning. Pretty neat right?" };
+    public static readonly string[] subtitle_exploration_tree_1_c2_c = { "HANDLER: Our job, your job is to make sure the Archive gets a photo of that artifact. If you wanna take crazy pictures of old buildings, be my guest." };
+
+    // Audio
+    public static readonly AudioClip clip_exploration_tree_1_choice_1 = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_1");
+    public static readonly AudioClip clip_exploration_tree_1_c1_a= Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_2a");
+    public static readonly AudioClip clip_exploration_tree_1_c1_b = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_2b");
+
+    public static readonly AudioClip clip_exploration_tree_1_choice_2 = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_11");
+    public static readonly AudioClip clip_exploration_tree_1_c2_a = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_12");
+    public static readonly AudioClip clip_exploration_tree_1_c2_b = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_13a");
+    public static readonly AudioClip clip_exploration_tree_1_c2_c = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_13b");
+    public static readonly AudioClip clip_exploration_tree_1_c2_d = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_13c");
+    public static readonly AudioClip clip_exploration_tree_1_c2_e = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_13d");
+    public static readonly AudioClip clip_exploration_tree_1_c2_f = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_13e");
+    public static readonly AudioClip clip_exploration_tree_1_c2_g = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_14");
+
+    public static readonly AudioClip clip_exploration_tree_2_choice_1 = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_3");
+    public static readonly AudioClip clip_exploration_tree_2_c1_a = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_4a");
+    public static readonly AudioClip clip_exploration_tree_2_c1_b = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_4b");
+    public static readonly AudioClip clip_exploration_tree_2_c1_c = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_5");
+
+    public static readonly AudioClip clip_exploration_tree_2_choice_2 = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_6");
+    public static readonly AudioClip clip_exploration_tree_2_c2_a = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_7");
+    public static readonly AudioClip clip_exploration_tree_2_c2_b = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_8");
+    public static readonly AudioClip clip_exploration_tree_2_c2_c = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_9");
+    public static readonly AudioClip clip_exploration_tree_2_c2_d = Resources.Load<AudioClip>("Scene3/EX_Scenes_Clip_10");
+    #endregion
 }

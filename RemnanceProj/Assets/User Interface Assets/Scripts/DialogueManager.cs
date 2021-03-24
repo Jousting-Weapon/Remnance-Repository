@@ -157,10 +157,10 @@ public class DialogueManager : MonoBehaviour
         {
             if (nodeTimer <= 0)
             {
-                // Populate choices
-                currentNode = null;
+                currentNode = CreateExplorationDialogueTree();
                 nodeTimer = 0;
                 gameDisplayText.text = "";
+                inEntrance = false;
             }
             else
             {
@@ -300,8 +300,11 @@ public class DialogueManager : MonoBehaviour
                         isWristCommActive = false;
                     }
                     else
-                    { 
-                        // Change current node
+                    {
+                        // Change current node, make sure player can't keep pressing Q
+                        currentNode = currentNode.GetNextChild(selectedChoice);
+                        selectedChoice = 0;
+                        DisplayNextSentence();
                     }
                 }
                 else
@@ -309,6 +312,7 @@ public class DialogueManager : MonoBehaviour
                     dialogChoicesTransform.gameObject.SetActive(true);
                     closeText.gameObject.SetActive(true);
                     isWristCommActive = true;
+                    UpdateSelectionBackground();
                 }
             }
 
@@ -477,7 +481,6 @@ public class DialogueManager : MonoBehaviour
             gameDisplayText.text = temp.Item1;
             nodeTimer = temp.Item2;
             timer = temp.Item2;
-            inEntrance = false;
             selectedChoice = -1;
             UpdateSelectionBackground();
         }
@@ -604,7 +607,7 @@ public class DialogueManager : MonoBehaviour
         DialogueNode subtitle_entrance_node_4 = new DialogueNode(DialogueAssets.subtitle_entrance_4, DialogueAssets.clip_entrance_9, DialogueAssets.clip_entrance_10);
         DialogueNode subtitle_entrance_node_5 = new DialogueNode(DialogueAssets.subtitle_entrance_5, DialogueAssets.clip_entrance_11, DialogueAssets.clip_entrance_12);
         DialogueNode subtitle_entrance_node_6 = new DialogueNode(DialogueAssets.subtitle_entrance_6, DialogueAssets.clip_entrance_13, DialogueAssets.clip_entrance_14);
-        TimerNode gameDisplay_entrance_1_node = new TimerNode(DialogueAssets.gameDisplay_entrance_1, 5);
+        TimerNode gameDisplay_entrance_1_node = new TimerNode(DialogueAssets.gameDisplay_entrance_1, 2);
 
         subtitle_entrance_node_1.SetChildren(subtitle_entrance_node_2);
         subtitle_entrance_node_2.SetChildren(subtitle_entrance_node_3);
@@ -614,6 +617,37 @@ public class DialogueManager : MonoBehaviour
         subtitle_entrance_node_6.SetChildren(gameDisplay_entrance_1_node);
 
         return subtitle_entrance_node_1;
+    }
+
+    static TreeNode CreateExplorationDialogueTree()
+    {
+        PromptNode choice_tree_1_node = new PromptNode(DialogueAssets.choice_exploration_tree_1, Q_INPUT);
+
+        // Choice - Relic Guardians?
+        DialogueNode subtitle_tree_1_c1_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c1, DialogueAssets.clip_exploration_tree_1_choice_1, DialogueAssets.clip_exploration_tree_1_c1_a, DialogueAssets.clip_exploration_tree_1_c1_b);
+
+        // Choice - Can I document these buildings?
+        DialogueNode subtitle_tree_1_c2_a_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c2_a, DialogueAssets.clip_exploration_tree_1_choice_2, DialogueAssets.clip_exploration_tree_1_c2_a);
+        DialogueNode subtitle_tree_1_c2_b_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c2_b, DialogueAssets.clip_exploration_tree_1_c2_b, DialogueAssets.clip_exploration_tree_1_c2_c, DialogueAssets.clip_exploration_tree_1_c2_d, DialogueAssets.clip_exploration_tree_1_c2_e, DialogueAssets.clip_exploration_tree_1_c2_f);
+        DialogueNode subtitle_tree_1_c2_c_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c2_c, DialogueAssets.clip_exploration_tree_1_c2_g);
+
+        PromptNode choice_tree_2_node = new PromptNode(DialogueAssets.choice_exploration_tree_2, Q_INPUT);
+
+        // Choice - Are they...dangerous?
+        DialogueNode subtitle_tree_2_c1_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_2_c1, DialogueAssets.clip_exploration_tree_2_choice_1, DialogueAssets.clip_exploration_tree_2_c1_a, DialogueAssets.clip_exploration_tree_2_c1_b, DialogueAssets.clip_exploration_tree_2_c1_c);
+
+        // Choice - Is there anyway to shut them down or disable them?
+        DialogueNode subtitle_tree_2_c2_a_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_2_c2_a, DialogueAssets.clip_exploration_tree_2_choice_2, DialogueAssets.clip_exploration_tree_2_c2_a);
+        DialogueNode subtitle_tree_2_c2_b_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_2_c2_b, DialogueAssets.clip_exploration_tree_2_c2_b, DialogueAssets.clip_exploration_tree_2_c2_c, DialogueAssets.clip_exploration_tree_2_c2_d);
+
+        choice_tree_1_node.SetChildren(subtitle_tree_1_c1_node, subtitle_tree_1_c2_a_node);
+        subtitle_tree_1_c1_node.SetChildren(choice_tree_2_node);
+        subtitle_tree_1_c2_a_node.SetChildren(subtitle_tree_1_c2_b_node);
+        subtitle_tree_1_c2_b_node.SetChildren(subtitle_tree_1_c2_c_node);
+        choice_tree_2_node.SetChildren(subtitle_tree_2_c1_node, subtitle_tree_2_c2_a_node);
+        subtitle_tree_2_c2_a_node.SetChildren(subtitle_tree_2_c2_b_node);
+
+        return choice_tree_1_node;
     }
 }
 
