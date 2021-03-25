@@ -13,8 +13,8 @@ public class Equipment : MonoBehaviour
     {
         if (Input.GetKeyDown(interactKey))
         {
-                interactAction.Invoke();
-                //FindObjectOfType<GameManager>().CompleteLevel();
+            interactAction.Invoke();
+            //FindObjectOfType<GameManager>().CompleteLevel();
         }
     }
 
@@ -39,4 +39,3 @@ public class Equipment : MonoBehaviour
             }
 
     }
-}

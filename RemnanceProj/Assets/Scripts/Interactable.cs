@@ -14,15 +14,15 @@ public class Interactable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isInRange)
-        if(isInRange && GameObject.Find("OldCamera").GetComponent<Equipment>().cameraOutCount == 77)
-        {
-            if(Input.GetKeyDown(interactKey))
+        if (isInRange)
+            if (isInRange && GameObject.Find("OldCamera").GetComponent<Equipment>().cameraOutCount == 77)
             {
-                interactAction.Invoke();
-                FindObjectOfType<GameManager>().CompleteLevel();
+                if (Input.GetKeyDown(interactKey))
+                {
+                    interactAction.Invoke();
+                    FindObjectOfType<GameManager>().CompleteLevel();
+                }
             }
-        }
     }
 
     void OnTriggerEnter(Collider collision)
