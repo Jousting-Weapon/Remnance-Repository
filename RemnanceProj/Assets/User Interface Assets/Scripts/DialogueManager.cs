@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour
     private Transform dialogChoicesTransform;
     private Transform selectedChoiceBackground;
     private TextMeshProUGUI choicesText;
-    private Transform scrollBar;
+    private Scrollbar scrollBar;
     private Transform closeText;
 
     private int userInputFlag;
@@ -43,6 +43,7 @@ public class DialogueManager : MonoBehaviour
     private bool doneFading;
 
     private bool isWristCommActive;
+    private bool canOpenComm;
 
     private float nodeTimer;
 
@@ -52,6 +53,8 @@ public class DialogueManager : MonoBehaviour
     /// A dictionary whose keys are the indexes of the choices and whose values are the number of lines before it
     /// </summary>
     private Dictionary<int, int> currentChoices;
+
+    private List<Tuple<TreeNode, string>> explorationChoices;
 
     private Vector3 oldMouseInput;
 
@@ -65,7 +68,7 @@ public class DialogueManager : MonoBehaviour
         dialogChoicesTransform = transform.GetChild(2);
         selectedChoiceBackground = dialogChoicesTransform.GetChild(0);
         choicesText = dialogChoicesTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        scrollBar = dialogChoicesTransform.GetChild(2);
+        scrollBar = dialogChoicesTransform.GetChild(2).GetComponent<Scrollbar>();
         closeText = dialogChoicesTransform.GetChild(3);
         closeText.gameObject.SetActive(false);
 
@@ -95,6 +98,7 @@ public class DialogueManager : MonoBehaviour
         inEntrance = false;
 
         currentChoices = new Dictionary<int, int>();
+        explorationChoices = new List<Tuple<TreeNode, string>>();
 
         currentNode = CreateTutorialDialogueTree();
     }
@@ -145,6 +149,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     inTutorial = false;
                     subtitlesText.text = "";
+                    canOpenComm = true;
                 }
             }
             else
@@ -161,6 +166,8 @@ public class DialogueManager : MonoBehaviour
                 nodeTimer = 0;
                 gameDisplayText.text = "";
                 inEntrance = false;
+                canOpenComm = true;
+                closeText.gameObject.SetActive(true);
             }
             else
             {
@@ -173,6 +180,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
         {
+            // TODO: USE COLLISION TRIGGER
             inEntrance = true;
             waitingForInput = false;
             selectedChoice = 0;
@@ -290,21 +298,31 @@ public class DialogueManager : MonoBehaviour
 
         if (!inTutorial && !inEntrance)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q) && canOpenComm)
             {
                 if (isWristCommActive)
                 {
-                    if (selectedChoice == -1)
+                    dialogChoicesTransform.gameObject.SetActive(false);
+                    isWristCommActive = false;
+                    canOpenComm = true;
+
+                    if (selectedChoice != -1)
                     {
-                        dialogChoicesTransform.gameObject.SetActive(false);
-                        isWristCommActive = false;
-                    }
-                    else
-                    {
-                        // Change current node, make sure player can't keep pressing Q
-                        currentNode = currentNode.GetNextChild(selectedChoice);
-                        selectedChoice = 0;
+                        canOpenComm = false;
+                        currentNode = explorationChoices[selectedChoice].Item1;
+                        explorationChoices.RemoveAt(selectedChoice);
+
+                        string[] newChoices = new string[explorationChoices.Count];
+                        for (int i = 0; i < explorationChoices.Count; i++)
+                        {
+                            newChoices[i] = explorationChoices[i].Item2;
+                        }
+
+                        choices = newChoices;
+                        UpdateChoices(-1, choices);
+
                         DisplayNextSentence();
+                        selectedChoice = 0;
                     }
                 }
                 else
@@ -312,6 +330,7 @@ public class DialogueManager : MonoBehaviour
                     dialogChoicesTransform.gameObject.SetActive(true);
                     closeText.gameObject.SetActive(true);
                     isWristCommActive = true;
+                    selectedChoice = -1;
                     UpdateSelectionBackground();
                 }
             }
@@ -350,7 +369,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-
     void UpdateChoices(params string[] input)
     {
         choicesText.text = "";
@@ -372,12 +390,39 @@ public class DialogueManager : MonoBehaviour
         UpdateSelectionBackground();
     }
 
+    void UpdateChoices(int index, params string[] input)
+    {
+        choicesText.text = "";
+        currentChoices.Clear();
+
+        int numLinesOffset = 0;
+        for (int i = 0; i < input.Length; i++)
+        {
+            string decision = input[i];
+            choicesText.text += decision + "\n";
+
+            currentChoices.Add(i, numLinesOffset);
+
+            numLinesOffset += ((decision.Length - 1) / maxCharsPerLine) + 1;
+        }
+
+        selectedChoice = index;
+
+        UpdateSelectionBackground();
+    }
+
     void UpdateSelectionBackground()
     {
         choicesText.ForceMeshUpdate();
         Canvas.ForceUpdateCanvases();
 
         int verticalPadding = 5;
+
+        float diff = 0;
+        if (closeText.gameObject.activeSelf)
+        {
+            diff = closeText.GetComponent<RectTransform>().localPosition.y - choicesText.GetComponent<RectTransform>().localPosition.y;
+        }
 
         if (selectedChoice == -1)
         {
@@ -386,6 +431,9 @@ public class DialogueManager : MonoBehaviour
             selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (int)((closeText.GetComponent<TextMeshProUGUI>().text.Length * charSize) + 2 * selectionBoxPadding));
             selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, closeText.GetComponent<TextMeshProUGUI>().textInfo.lineInfo[0].lineHeight + verticalPadding);
 
+            scrollBar.transform.localPosition = new Vector3(scrollBar.GetComponent<RectTransform>().anchoredPosition.x, choicesText.GetComponent<RectTransform>().localPosition.y + diff, 0);
+            scrollBar.transform.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scrollBar.transform.GetComponent<RectTransform>().sizeDelta.x + diff);
+            
             return;
         }
 
@@ -395,9 +443,12 @@ public class DialogueManager : MonoBehaviour
         int maxLength = choices[selectedChoice].Length;
 
         float yOffset = verticalPadding;
-        for (int i = 0; i < tempIndex; i++)
+        int index;
+        float scrollHeight = 0;
+        for (index = 0; index < tempIndex; index++)
         { 
-            yOffset += choicesText.textInfo.lineInfo[i].lineHeight;
+            yOffset += choicesText.textInfo.lineInfo[index].lineHeight;
+            scrollHeight += choicesText.textInfo.lineInfo[index].lineHeight;
         }
 
         while (curLength > 0)
@@ -414,6 +465,14 @@ public class DialogueManager : MonoBehaviour
 
         selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, tempWidth);
         selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, tempHeight);
+
+        for (; index < choicesText.textInfo.lineInfo[index].length; index++)
+        {
+            scrollHeight += choicesText.textInfo.lineInfo[index].lineHeight;
+        }
+
+        scrollBar.transform.localPosition = new Vector3(scrollBar.GetComponent<RectTransform>().anchoredPosition.x, choicesText.GetComponent<RectTransform>().localPosition.y + verticalPadding, 0);
+        scrollBar.transform.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scrollHeight + choicesText.textInfo.lineCount * verticalPadding);
 
         //iTween.MoveTo(textBackground, new Vector3(375, -1 * backgroundHeight * currentChoices[selectedChoiceIndex] + 240, 0), 1);
     }
@@ -471,7 +530,7 @@ public class DialogueManager : MonoBehaviour
                 timer = temp.Item2.length;
             }
         }
-        else
+        else if (currentNode is TimerNode)
         {
             subtitlesText.text = "";
 
@@ -483,6 +542,31 @@ public class DialogueManager : MonoBehaviour
             timer = temp.Item2;
             selectedChoice = -1;
             UpdateSelectionBackground();
+        }
+        else
+        {
+            subtitlesText.text = "";
+
+            ChoiceNode node = (ChoiceNode)currentNode;
+
+            TreeNode[] array = node.GetChildren();
+            string[] newChoices = node.GetChoices();
+
+            for (int i = array.Length - 1; i >= 0; i--)
+            {
+                explorationChoices.Insert(0, new Tuple<TreeNode, string>(array[i], newChoices[i]));
+            }
+
+            newChoices = new string[explorationChoices.Count];
+            for (int i = 0; i < explorationChoices.Count; i++)
+            {
+                newChoices[i] = explorationChoices[i].Item2;
+            }
+
+            currentNode = null;
+
+            choices = newChoices;
+            UpdateChoices(-1, choices);
         }
     }
 
@@ -621,7 +705,7 @@ public class DialogueManager : MonoBehaviour
 
     static TreeNode CreateExplorationDialogueTree()
     {
-        PromptNode choice_tree_1_node = new PromptNode(DialogueAssets.choice_exploration_tree_1, Q_INPUT);
+        ChoiceNode choice_tree_1_node = new ChoiceNode(DialogueAssets.choice_exploration_tree_1);
 
         // Choice - Relic Guardians?
         DialogueNode subtitle_tree_1_c1_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c1, DialogueAssets.clip_exploration_tree_1_choice_1, DialogueAssets.clip_exploration_tree_1_c1_a, DialogueAssets.clip_exploration_tree_1_c1_b);
@@ -631,7 +715,7 @@ public class DialogueManager : MonoBehaviour
         DialogueNode subtitle_tree_1_c2_b_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c2_b, DialogueAssets.clip_exploration_tree_1_c2_b, DialogueAssets.clip_exploration_tree_1_c2_c, DialogueAssets.clip_exploration_tree_1_c2_d, DialogueAssets.clip_exploration_tree_1_c2_e, DialogueAssets.clip_exploration_tree_1_c2_f);
         DialogueNode subtitle_tree_1_c2_c_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c2_c, DialogueAssets.clip_exploration_tree_1_c2_g);
 
-        PromptNode choice_tree_2_node = new PromptNode(DialogueAssets.choice_exploration_tree_2, Q_INPUT);
+        ChoiceNode choice_tree_2_node = new ChoiceNode(DialogueAssets.choice_exploration_tree_2);
 
         // Choice - Are they...dangerous?
         DialogueNode subtitle_tree_2_c1_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_2_c1, DialogueAssets.clip_exploration_tree_2_choice_1, DialogueAssets.clip_exploration_tree_2_c1_a, DialogueAssets.clip_exploration_tree_2_c1_b, DialogueAssets.clip_exploration_tree_2_c1_c);
@@ -649,11 +733,21 @@ public class DialogueManager : MonoBehaviour
 
         return choice_tree_1_node;
     }
+
+    static TreeNode CreateCaveEntranceDialogueTree()
+    {
+        return null;
+    }
+
+    static TreeNode CreateArtifactPictureDialogueTree()
+    {
+        return null;
+    }
 }
 
 abstract class TreeNode
 {
-    private TreeNode[] children;
+    protected TreeNode[] children;
 
     public TreeNode()
     {
@@ -749,5 +843,25 @@ class TimerNode : TreeNode
     public Tuple<string, float> GetDisplayTime()
     {
         return new Tuple<string, float>(displayText, timeBeforeDisappear);
+    }
+}
+
+class ChoiceNode : TreeNode
+{
+    private string[] choices;
+
+    public ChoiceNode(params string[] input)
+    {
+        choices = input;
+    }
+
+    public string[] GetChoices()
+    {
+        return choices;
+    }
+
+    public TreeNode[] GetChildren()
+    {
+        return children;
     }
 }
