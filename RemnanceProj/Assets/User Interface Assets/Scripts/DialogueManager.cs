@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public int test = 9; // TODO: DELETE ME
     private const int Q_INPUT = 1;
     private const int MOUSE_INPUT = 2;
     private const int WASD_INPUT = 60;
@@ -36,7 +37,6 @@ public class DialogueManager : MonoBehaviour
     private int selectedChoice;
 
     private bool waitingForInput;
-    private bool inTutorial;
 
     private float alphaFadeValue, fadeInTime;
     private Transform fadeInScreen;
@@ -47,7 +47,9 @@ public class DialogueManager : MonoBehaviour
 
     private float nodeTimer;
 
+    private bool inTutorial;
     private bool inEntrance;
+    private bool inCave;
 
     /// <summary>
     /// A dictionary whose keys are the indexes of the choices and whose values are the number of lines before it
@@ -68,6 +70,7 @@ public class DialogueManager : MonoBehaviour
         dialogChoicesTransform = transform.GetChild(2);
         selectedChoiceBackground = dialogChoicesTransform.GetChild(0);
         choicesText = dialogChoicesTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        choicesText.text = "";
         scrollBar = dialogChoicesTransform.GetChild(2).GetComponent<Scrollbar>();
         closeText = dialogChoicesTransform.GetChild(3);
         closeText.gameObject.SetActive(false);
@@ -93,9 +96,11 @@ public class DialogueManager : MonoBehaviour
         doneFading = false;
 
         isWristCommActive = false;
+        canOpenComm = false;
 
         nodeTimer = 0;
         inEntrance = false;
+        inCave = false;
 
         currentChoices = new Dictionary<int, int>();
         explorationChoices = new List<Tuple<TreeNode, string>>();
@@ -119,8 +124,10 @@ public class DialogueManager : MonoBehaviour
         float minCharWidth = choicesText.fontSize * (1 / 4);
         charSize = (maxCharWidth + minCharWidth) / 2;
 
-        maxCharsPerLine = (int)(choicesText.gameObject.GetComponent<RectTransform>().rect.width / charSize);
+        maxCharsPerLine = (int)(choicesText.gameObject.GetComponent<RectTransform>().rect.width / charSize) + 2; // make slightly longer
         selectionBoxPadding = 15;
+
+        Debug.Log("Collison detection not yet implemented. Press: Y for site entrance, U for cave entrance, I for artifact picture... Press WASD to 'pick up' artifact for now");
     }
 
     void FixedUpdate()
@@ -180,14 +187,47 @@ public class DialogueManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
         {
-            // TODO: USE COLLISION TRIGGER
+            // TODO: USE COLLISION TRIGGER - SITE ENTRANCE
+            explorationChoices.Clear();
+            dialogChoicesTransform.gameObject.SetActive(false);
             inEntrance = true;
             waitingForInput = false;
             selectedChoice = 0;
             currentNode = CreateSiteEntranceDialogueTree();
         }
 
-        if (inTutorial && waitingForInput)
+        if (Input.GetKeyDown(KeyCode.U) && !inTutorial)
+        {
+            // TODO: USE COLLISION TRIGGER - CAVE ENTRANCE
+            explorationChoices.Clear();
+            dialogChoicesTransform.gameObject.SetActive(false);
+            waitingForInput = false;
+            canOpenComm = false;
+            inCave = true;
+            selectedChoice = 0;
+            subtitlesText.text = "";
+            gameDisplayText.text = "";
+            audioSource.Stop();
+            timer = 0;
+            currentNode = CreateCaveEntranceDialogueTree();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I) && !inTutorial)
+        {
+            // TODO: USE COLLISION TRIGGER - ARTIFACT PICTURE
+            explorationChoices.Clear();
+            dialogChoicesTransform.gameObject.SetActive(false);
+            waitingForInput = false;
+            canOpenComm = false;
+            selectedChoice = 0;
+            subtitlesText.text = "";
+            gameDisplayText.text = "";
+            audioSource.Stop();
+            timer = 0;
+            currentNode = CreateArtifactPictureDialogueTree();
+        }
+
+        if ((inTutorial || inCave) && waitingForInput)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -296,7 +336,7 @@ public class DialogueManager : MonoBehaviour
             userInputFlag = 0;
         }
 
-        if (!inTutorial && !inEntrance)
+        if (!inTutorial && !inEntrance && !inCave)
         {
             if (Input.GetKeyDown(KeyCode.Q) && canOpenComm)
             {
@@ -416,7 +456,7 @@ public class DialogueManager : MonoBehaviour
         choicesText.ForceMeshUpdate();
         Canvas.ForceUpdateCanvases();
 
-        int verticalPadding = 5;
+        int verticalPadding = 0;
 
         float diff = 0;
         if (closeText.gameObject.activeSelf)
@@ -442,7 +482,7 @@ public class DialogueManager : MonoBehaviour
         int curLength = choices[selectedChoice].Length - choicesText.textInfo.lineInfo[tempIndex].characterCount;
         int maxLength = choices[selectedChoice].Length;
 
-        float yOffset = verticalPadding;
+        float yOffset = -verticalPadding;
         int index;
         float scrollHeight = 0;
         for (index = 0; index < tempIndex; index++)
@@ -461,7 +501,7 @@ public class DialogueManager : MonoBehaviour
 
         int tempWidth = (int)((maxLength * charSize) + 2 * selectionBoxPadding);
 
-        selectedChoiceBackground.transform.localPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, choicesText.GetComponent<RectTransform>().localPosition.y - (yOffset) * selectedChoice, 0);
+        selectedChoiceBackground.transform.localPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, choicesText.GetComponent<RectTransform>().localPosition.y - (yOffset) - test * selectedChoice, 0);
 
         selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, tempWidth);
         selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, tempHeight);
@@ -498,9 +538,19 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                dialogChoicesTransform.gameObject.SetActive(true);
-                UpdateChoices(choices);
-                isWristCommActive = true;
+                if (choices.Length == 1 && choices[0] == "")
+                {
+                    dialogChoicesTransform.gameObject.SetActive(false);
+                    isWristCommActive = false;
+                    subtitlesText.text = "";
+                    gameDisplayText.text = "";
+                }
+                else
+                {
+                    dialogChoicesTransform.gameObject.SetActive(true);
+                    UpdateChoices(choices);
+                    isWristCommActive = true;
+                }
             }
         }
         else if (currentNode is DialogueNode)
@@ -736,12 +786,89 @@ public class DialogueManager : MonoBehaviour
 
     static TreeNode CreateCaveEntranceDialogueTree()
     {
-        return null;
+        DialogueNode initial_node = new DialogueNode(DialogueAssets.subtitle_cave_1, DialogueAssets.clip_cave_1, DialogueAssets.clip_cave_2, DialogueAssets.clip_cave_3);
+        DialogueNode initial_node_2 = new DialogueNode(DialogueAssets.subtitle_cave_2, DialogueAssets.clip_cave_4, DialogueAssets.clip_cave_5a, DialogueAssets.clip_cave_5b, DialogueAssets.clip_cave_5c);
+
+        ChoiceNode choice_node = new ChoiceNode(DialogueAssets.choice_cave_tree_1);
+
+        DialogueNode tree_1_choice_1_node = new DialogueNode(DialogueAssets.subtitle_cave_tree_1_c1, DialogueAssets.clip_cave_tree_1_choice_1a, DialogueAssets.clip_cave_tree_1_choice_1b, DialogueAssets.clip_cave_tree_1_choice_1c);
+        DialogueNode tree_1_choice_2_node_a = new DialogueNode(DialogueAssets.subtitle_cave_tree_1_c2a, DialogueAssets.clip_cave_tree_1_choice_2a, DialogueAssets.clip_cave_tree_1_choice_2b, DialogueAssets.clip_cave_tree_1_choice_2c, DialogueAssets.clip_cave_tree_1_choice_2d);
+        DialogueNode tree_1_choice_2_node_b = new DialogueNode(DialogueAssets.subtitle_cave_tree_1_c2b, DialogueAssets.clip_cave_tree_1_choice_2e, DialogueAssets.clip_cave_tree_1_choice_2f, DialogueAssets.clip_cave_tree_1_choice_2g, DialogueAssets.clip_cave_tree_1_choice_2h, DialogueAssets.clip_cave_tree_1_choice_2i);
+
+        initial_node.SetChildren(initial_node_2);
+        initial_node_2.SetChildren(choice_node);
+        choice_node.SetChildren(tree_1_choice_1_node, tree_1_choice_2_node_a);
+        tree_1_choice_2_node_a.SetChildren(tree_1_choice_2_node_b);
+
+        return initial_node;
     }
 
     static TreeNode CreateArtifactPictureDialogueTree()
     {
-        return null;
+        DialogueNode initial_node_1 = new DialogueNode(DialogueAssets.subtitle_artifact_initial_1, DialogueAssets.clip_artifact_1, DialogueAssets.clip_artifact_2);
+        DialogueNode initial_node_2 = new DialogueNode(DialogueAssets.subtitle_artifact_initial_2, DialogueAssets.clip_artifact_3, DialogueAssets.clip_artifact_4);
+        DialogueNode initial_node_3 = new DialogueNode(DialogueAssets.subtitle_artifact_initial_3, DialogueAssets.clip_artifact_5, DialogueAssets.clip_artifact_6);
+        DialogueNode initial_node_4 = new DialogueNode(DialogueAssets.subtitle_artifact_initial_4, DialogueAssets.clip_artifact_7, DialogueAssets.clip_artifact_8);
+
+        PromptNode tree_1_choice_node = new PromptNode(DialogueAssets.choice_artifact_tree_1, Q_INPUT);
+
+        DialogueNode t1_c1_node_a = new DialogueNode(DialogueAssets.subtitle_artifact_tree_1_c_1, DialogueAssets.clip_artifact_t1_c1);
+        DialogueNode t1_c1_node_b = new DialogueNode(DialogueAssets.subtitle_artifact_tree_1_c1_a, DialogueAssets.clip_artifact_t1_c1_a, DialogueAssets.clip_artifact_t1_c1_b);
+        PromptNode t1_c1_choice_node = new PromptNode(new string[] { "" }, WASD_INPUT); // TODO: Change input to picking up object
+        DialogueNode t1_c1_node_c = new DialogueNode(DialogueAssets.subtitle_artifact_tree_2, DialogueAssets.clip_artifact_t2);
+
+        DialogueNode t1_c2_node_a = new DialogueNode(DialogueAssets.subtitle_artifact_tree_1_c_2, DialogueAssets.clip_artifact_t1_c2);
+        DialogueNode t1_c2_node_b = new DialogueNode(DialogueAssets.subtitle_artifact_tree_1_c2_a, DialogueAssets.clip_artifact_t1_c2_a);
+        PromptNode t1_c2_choice_node = new PromptNode(new string[] { "" }, WASD_INPUT); // TODO: Change input to picking up artifact
+        DialogueNode t1_c2_node_c = new DialogueNode(DialogueAssets.substitle_artifact_tree_1_c2_b, DialogueAssets.clip_artifact_t1_c2_b);
+
+        DialogueNode post_artifact = new DialogueNode(DialogueAssets.subtitle_artifact_retrieved, DialogueAssets.clip_artifact_retrieved_1, DialogueAssets.clip_artifact_retrieved_2, DialogueAssets.clip_artifact_retrieved_3);
+
+        PromptNode news = new PromptNode(DialogueAssets.choice_artifact_tree_3, Q_INPUT);
+
+        DialogueNode news_choice_1 = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_c_1, DialogueAssets.clip_artifact_t3_c1);
+        DialogueNode news_choice_1_a = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_no_good_news, DialogueAssets.clip_artifact_no_good_news);
+        DialogueNode news_choice_1_b = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_c_1_a, DialogueAssets.clip_artifact_t3_c1_a);
+        DialogueNode news_choice_1_c = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_bad_news, DialogueAssets.clip_artifact_bad_news_a, DialogueAssets.clip_artifact_bad_news_b, DialogueAssets.clip_artifact_bad_news_c);
+        DialogueNode news_choice_1_d = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_on_the_way, DialogueAssets.clip_artifact_on_the_way);
+
+        DialogueNode news_choice_2 = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_c_2, DialogueAssets.clip_artifact_t3_c2);
+        DialogueNode news_choice_2_a = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_bad_news, DialogueAssets.clip_artifact_bad_news_a, DialogueAssets.clip_artifact_bad_news_b, DialogueAssets.clip_artifact_bad_news_c);
+        DialogueNode news_choice_2_b = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_c_2_a, DialogueAssets.clip_artifact_t3_c2_a);
+        DialogueNode news_choice_2_c = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_no_good_news, DialogueAssets.clip_artifact_no_good_news);
+        DialogueNode news_choice_2_d = new DialogueNode(DialogueAssets.subtitle_artifact_tree_3_on_the_way, DialogueAssets.clip_artifact_on_the_way);
+
+        initial_node_1.SetChildren(initial_node_2);
+        initial_node_2.SetChildren(initial_node_3);
+        initial_node_3.SetChildren(initial_node_4);
+        initial_node_4.SetChildren(tree_1_choice_node);
+
+        tree_1_choice_node.SetChildren(t1_c1_node_a, t1_c2_node_a);
+
+        t1_c1_node_a.SetChildren(t1_c1_node_b);
+        t1_c1_node_b.SetChildren(t1_c1_choice_node);
+        t1_c1_choice_node.SetChildren(t1_c1_node_c);
+        t1_c1_node_c.SetChildren(post_artifact);
+
+        t1_c2_node_a.SetChildren(t1_c2_node_b);
+        t1_c2_node_b.SetChildren(t1_c2_choice_node);
+        t1_c2_choice_node.SetChildren(t1_c2_node_c);
+        t1_c2_node_c.SetChildren(post_artifact);
+
+        post_artifact.SetChildren(news);
+        news.SetChildren(news_choice_1, news_choice_2);
+
+        news_choice_1.SetChildren(news_choice_1_a);
+        news_choice_1_a.SetChildren(news_choice_1_b);
+        news_choice_1_b.SetChildren(news_choice_1_c);
+        news_choice_1_c.SetChildren(news_choice_1_d);
+
+        news_choice_2.SetChildren(news_choice_2_a);
+        news_choice_2_a.SetChildren(news_choice_2_b);
+        news_choice_2_b.SetChildren(news_choice_2_c);
+        news_choice_2_c.SetChildren(news_choice_2_d);
+
+        return initial_node_1;
     }
 }
 
@@ -778,6 +905,12 @@ class DialogueNode : TreeNode
     
     public DialogueNode(string[] sentences, params AudioClip[] clips)
     {
+        if (sentences.Length != clips.Length)
+        {
+            Debug.LogError("Dialogue needs number of sentences to equal number of clips");
+            Debug.Log("Sentences: " + sentences.Length + ", Clips: " + clips.Length);
+        }
+
         sentencesToDisplay = sentences;
         audioClips = clips;
         currentSentence = 0;
