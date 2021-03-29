@@ -8,9 +8,9 @@ public class TestWarning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetKeyDown(KeyCode.T))
+       if(Input.GetKeyDown(KeyCode.E) && GameObject.Find("OldCamera").GetComponent<Equipment>().cameraOutCount == 0)
         {
-            WarningSystem.Instance.ShowMessage("Some message");
+            WarningSystem.Instance.ShowMessage("Equip camera to interact! 'F' ");
         }
     }
 }
