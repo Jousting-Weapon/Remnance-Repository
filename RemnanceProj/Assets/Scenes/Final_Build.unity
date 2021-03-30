@@ -1244,6 +1244,22 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4982293986936571055, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
+      propertyPath: gravity
+      value: -1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982293986936571055, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
+      propertyPath: jumpHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982293986936571055, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 1744752078}
+    - target: {fileID: 4982293986936571055, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
+      propertyPath: groundDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6776663583948666794, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
       propertyPath: speed
       value: 1000
@@ -7306,6 +7322,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2994661992158006152, guid: 8a11d4fd5e673ce46b013c70f5dd6f99, type: 3}
   m_PrefabInstance: {fileID: 1849256196}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1744752078 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7254287371389178058, guid: 8a11d4fd5e673ce46b013c70f5dd6f99, type: 3}
+  m_PrefabInstance: {fileID: 1849256196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &1744752081
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8073,6 +8094,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 326207238957381945, guid: 8a11d4fd5e673ce46b013c70f5dd6f99, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7246402653520671971, guid: 8a11d4fd5e673ce46b013c70f5dd6f99, type: 3}
       propertyPath: m_Name
       value: Gameworld
