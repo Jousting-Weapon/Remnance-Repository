@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public Animator armAnimator;
+    //public Animation commLink;
+
     public int test = 9; // TODO: DELETE ME
     private const int Q_INPUT = 1;
     private const int MOUSE_INPUT = 2;
@@ -62,6 +65,8 @@ public class DialogueManager : MonoBehaviour
 
     void Awake()
     {
+        //commLink = armAnimator.GetComponent<Animation>();
+
         CheckGameStateValidity();
 
         subtitlesText = transform.GetChild(0).GetComponent<Text>();
@@ -185,6 +190,17 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            
+            //commLink.Play();
+            //armAnimator.SetBool("TestTrigger", true);
+            
+            armAnimator.SetTrigger("TestTrigger");
+            //armAnimator.Play("RaiseLeft");
+            Debug.Log("Animation?");
+        }
+
         if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
         {
             // TODO: USE COLLISION TRIGGER - SITE ENTRANCE
