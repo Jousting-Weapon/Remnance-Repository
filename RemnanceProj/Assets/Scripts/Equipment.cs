@@ -8,6 +8,12 @@ public class Equipment : MonoBehaviour
     public KeyCode interactKey;
     public UnityEvent interactAction;
     public int cameraOutCount = 0;
+    public bool isRendered;
+
+    private void Awake()
+    {
+        isRendered = false;
+    }
 
     void Update()
     {
@@ -37,6 +43,8 @@ public class Equipment : MonoBehaviour
                 Debug.Log("this is r: " + r);
                 Debug.Log("this is cameraOut: " + cameraOutCount);
             }
-
+        
+        // Sets the boolean value letting other scripts know if the camera is out to true or false
+        isRendered = !isRendered;
     }
 }
