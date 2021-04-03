@@ -23,6 +23,7 @@ public class Menu : MonoBehaviour
     public void Start()
     {
         audioSource.clip = DialogueAssets.clip_menuMusic;
+        audioSource.loop = true;
         audioSource.Play();
     }
 
