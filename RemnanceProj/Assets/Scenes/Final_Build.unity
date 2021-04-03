@@ -819,7 +819,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.225, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1877,6 +1877,10 @@ PrefabInstance:
     - target: {fileID: 4982293986936571055, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
       propertyPath: groundDistance
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578242211888918128, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
+      propertyPath: far clip plane
+      value: 200000
       objectReference: {fileID: 0}
     - target: {fileID: 6776663583948666794, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
       propertyPath: speed
@@ -6145,7 +6149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1159715368}
   m_Layer: 0
-  m_Name: Darude
+  m_Name: Sandstorm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7017,7 +7021,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1314050795
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,6 +3,10 @@ using UnityEngine;
 
 public static class DialogueAssets
 {
+    #region MainMenu
+    public static readonly AudioClip clip_menuMusic = Resources.Load<AudioClip>("MenuMusic");
+    #endregion
+
     #region Tutorial
     public static readonly string[] subtitle_tutorial_initial = { "PLAYER: Just touched down, it’s warmer than I thought it’d be.", "HANDLER: Excellent. Let’s get your systems calibrated.", "Halcian III’s gravitational field is slightly stronger than what your exosuit’s default settings are tuned to.", "We’re gonna need to adjust them to match the planet’s eco-level." };
     public static readonly string gameDisplay_tutorial_1 = "Press 'Q' to bring up your wrist commlink.";
