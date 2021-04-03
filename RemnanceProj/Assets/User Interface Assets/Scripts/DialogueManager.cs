@@ -196,7 +196,7 @@ public class DialogueManager : MonoBehaviour
             //commLink.Play();
             //armAnimator.SetBool("TestTrigger", true);
             
-            armAnimator.SetTrigger("RaiseLeftTrigger");
+            armAnimator.SetBool("InComms", !armAnimator.GetBool("InComms"));
             //armAnimator.Play("RaiseLeft");
             Debug.Log("Animation?");
         }
