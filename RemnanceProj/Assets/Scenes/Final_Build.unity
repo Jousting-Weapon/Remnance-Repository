@@ -1878,6 +1878,10 @@ PrefabInstance:
       propertyPath: groundDistance
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6578242211888918128, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
+      propertyPath: far clip plane
+      value: 200000
+      objectReference: {fileID: 0}
     - target: {fileID: 6776663583948666794, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
       propertyPath: speed
       value: 1000
@@ -6145,7 +6149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1159715368}
   m_Layer: 0
-  m_Name: Darude
+  m_Name: Sandstorm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
