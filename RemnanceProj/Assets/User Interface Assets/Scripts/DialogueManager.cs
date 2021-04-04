@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public Animator armAnimator;
-    //public Animation commLink;
+    public GameObject playerArms;
 
     public int test = 9; // TODO: DELETE ME
     private const int Q_INPUT = 1;
@@ -65,7 +65,8 @@ public class DialogueManager : MonoBehaviour
 
     void Awake()
     {
-        //commLink = armAnimator.GetComponent<Animation>();
+        // For Animation
+        playerArms.SetActive(false);
 
         CheckGameStateValidity();
 
@@ -190,15 +191,10 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.L))
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-            
-            //commLink.Play();
-            //armAnimator.SetBool("TestTrigger", true);
-            
+            playerArms.SetActive(true);
             armAnimator.SetBool("InComms", !armAnimator.GetBool("InComms"));
-            //armAnimator.Play("RaiseLeft");
-            Debug.Log("Animation?");
         }
 
         if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
