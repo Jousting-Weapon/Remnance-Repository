@@ -3508,6 +3508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a86798efce66624684ac647bdd0edcd, type: 3}
+--- !u!143 &1698918780 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 1737499277767906920, guid: a957311ee8f334f4db68811f264ea071, type: 3}
+  m_PrefabInstance: {fileID: 1737499277735599916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1709237064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4070,17 +4075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc7c66db34193a41aa065b99d499f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114000010875894212 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1840235039729149672, guid: a957311ee8f334f4db68811f264ea071, type: 3}
-  m_PrefabInstance: {fileID: 1737499277735599916}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ec5cf00ca181d45a42ba1870e148c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1737499277735599916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4090,7 +4084,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1737499277694294550, guid: a957311ee8f334f4db68811f264ea071, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 4294967295
+      value: 5175
       objectReference: {fileID: 0}
     - target: {fileID: 1737499277767906924, guid: a957311ee8f334f4db68811f264ea071, type: 3}
       propertyPath: m_Name
@@ -4102,7 +4096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1737499277767906925, guid: a957311ee8f334f4db68811f264ea071, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.47
+      value: 3.33
       objectReference: {fileID: 0}
     - target: {fileID: 1737499277767906925, guid: a957311ee8f334f4db68811f264ea071, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4169,6 +4163,10 @@ PrefabInstance:
       propertyPath: examinePoint
       value: 
       objectReference: {fileID: 1615472063}
+    - target: {fileID: 5927213157652963277, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5927213157652963279, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
       propertyPath: mainCamera
       value: 
@@ -4225,6 +4223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractiveObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 5927213158677695140, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5927213158677695142, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
       propertyPath: mainCamera
       value: 
@@ -4241,6 +4243,10 @@ PrefabInstance:
       propertyPath: examinePoint
       value: 
       objectReference: {fileID: 1615472063}
+    - target: {fileID: 5927213159220899014, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5927213159410596224, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
       propertyPath: mainCamera
       value: 
@@ -4251,7 +4257,7 @@ PrefabInstance:
       objectReference: {fileID: 1615472063}
     - target: {fileID: 5927213159410596230, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5927213159443836520, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
       propertyPath: mainCamera
@@ -4261,6 +4267,10 @@ PrefabInstance:
       propertyPath: examinePoint
       value: 
       objectReference: {fileID: 1615472063}
+    - target: {fileID: 5927213159443836526, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 663256b6bd6736c4cbb45914eb33576e, type: 3}
 --- !u!1001 &7140076370359999275
@@ -4361,7 +4371,7 @@ PrefabInstance:
     - target: {fileID: 7140076372040521144, guid: 91251183169c6fe42ba0c5bfd49fa006, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 114000010875894212}
+      objectReference: {fileID: 1698918780}
     - target: {fileID: 7140076372040521144, guid: 91251183169c6fe42ba0c5bfd49fa006, type: 3}
       propertyPath: crosshair
       value: 

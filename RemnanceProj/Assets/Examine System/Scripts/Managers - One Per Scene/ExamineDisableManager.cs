@@ -10,7 +10,7 @@ namespace ExamineSystem
         public static ExamineDisableManager instance;
 
         [SerializeField] private Image crosshair = null;
-        [SerializeField] private FirstPersonController player = null;
+        [SerializeField] private CharacterController player = null;
         [SerializeField] private ExamineRaycast raycastManager = null;
         [SerializeField] private BlurOptimized blur = null;
 
