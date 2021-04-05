@@ -12,7 +12,7 @@ public class Patrolling : MonoBehaviour{
    void Awake()
    {
        agent = GetComponent<NavMeshAgent>();
-       Debug.Log(agent);
+       //Debug.Log(agent);
        current = 0;
        agent.speed = 600;
    }
@@ -25,7 +25,7 @@ public class Patrolling : MonoBehaviour{
         {
            current = (current + 1) % points.Length;
            agent.destination = points[current].position;
-           Debug.Log(agent.transform.position);
+           //Debug.Log(agent.transform.position);
         }
    }
 }
