@@ -13,6 +13,7 @@ namespace ExamineSystem
         [SerializeField] private CharacterController player = null;
         [SerializeField] private ExamineRaycast raycastManager = null;
         [SerializeField] private BlurOptimized blur = null;
+        [SerializeField] private MouseLook mouseLook = null;
 
         void Awake()
         {
@@ -30,6 +31,7 @@ namespace ExamineSystem
                 blur.enabled = true;
                 crosshair.enabled = false;
                 player.enabled = false;
+                mouseLook.enabled = false;
             }
             else
             {
@@ -39,6 +41,7 @@ namespace ExamineSystem
                 blur.enabled = false;
                 crosshair.enabled = true;
                 player.enabled = true;
+                mouseLook.enabled = true;
             }
         }
     }

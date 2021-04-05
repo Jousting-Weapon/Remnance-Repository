@@ -9,6 +9,9 @@ TagManager:
   - ExitOptionsMenuButton
   - Options Menu
   - OptionsScreenButton
+  - Pickup
+  - Point
+  - ItemName
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
