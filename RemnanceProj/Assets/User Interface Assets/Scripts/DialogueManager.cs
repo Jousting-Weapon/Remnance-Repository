@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class DialogueManager : MonoBehaviour
     private int requiredInput;
 
     private AudioSource audioSource;
+    public AudioMixerGroup masterMixer;
 
     private TreeNode currentNode;
 
@@ -85,6 +87,7 @@ public class DialogueManager : MonoBehaviour
         requiredInput = 0;
 
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.GetComponent<AudioSource>().outputAudioMixerGroup = masterMixer;
 
         subtitlesText.text = "";
         gameDisplayText.text = "";
@@ -120,6 +123,7 @@ public class DialogueManager : MonoBehaviour
         source2.volume = 0.05f;
         source2.loop = true;
         source2.clip = DialogueAssets.clip_sandstorm;
+        source2.outputAudioMixerGroup = masterMixer;
         source2.Play();
 
         audioSource.clip = DialogueAssets.clip_intro_ramp;

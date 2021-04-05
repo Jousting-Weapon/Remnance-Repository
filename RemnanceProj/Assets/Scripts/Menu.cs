@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Menu : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class Menu : MonoBehaviour
     private Transform fadeInScreen;
     private bool doneFading;
     private AudioSource audioSource;
-    
+    public AudioMixerGroup masterMixer;
+
 
     public void Awake()
     {
@@ -18,6 +20,7 @@ public class Menu : MonoBehaviour
         fadeInTime = 3f;
 
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.GetComponent<AudioSource>().outputAudioMixerGroup = masterMixer;
     }
 
     public void Start()

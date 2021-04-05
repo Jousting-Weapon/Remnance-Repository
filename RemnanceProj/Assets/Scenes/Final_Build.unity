@@ -5530,6 +5530,7 @@ MonoBehaviour:
   armAnimator: {fileID: 1466299405}
   playerArms: {fileID: 1466299404}
   test: 9
+  masterMixer: {fileID: 24300002, guid: 4fb6fda462f2dfd4698515337aaf15e4, type: 2}
 --- !u!1 &899868381 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8248001837554408259, guid: c1019fc6effc47141a93a9db251e8b23, type: 3}
