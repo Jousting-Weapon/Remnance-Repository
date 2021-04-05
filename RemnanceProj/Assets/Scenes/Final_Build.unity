@@ -3303,7 +3303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc7c66db34193a41aa065b99d499f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayLength: 200
+  rayLength: 300
   layerMaskInteract:
     serializedVersion: 2
     m_Bits: 256
@@ -6067,12 +6067,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1034711083}
   m_LocalRotation: {x: -0, y: 0.08715572, z: -0, w: 0.9961947}
-  m_LocalPosition: {x: 1.6526623, y: -13.917406, z: 38.013287}
+  m_LocalPosition: {x: 1.6526654, y: -15.699406, z: 38.013298}
   m_LocalScale: {x: 0.012499999, y: 0.0125, z: 0.012499999}
   m_Children:
   - {fileID: 617308079}
-  m_Father: {fileID: 1267197728}
-  m_RootOrder: 3
+  m_Father: {fileID: 1144729789}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!124 &1034711085
 Behaviour:
@@ -7723,11 +7723,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266911505}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1267197728 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4049837321202538198, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
-  m_PrefabInstance: {fileID: 340595691}
-  m_PrefabAsset: {fileID: 0}
 --- !u!143 &1267197729 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 1939148942343963499, guid: 3ec8d6ae2743dad45a7b85084a730674, type: 3}
