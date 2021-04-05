@@ -9,31 +9,42 @@ public class CameraInteraction : MonoBehaviour
 {
     public GameObject Camera;
     public Flash FlashScript;
-    public Equipment EquipmentScript;
+    public GameObject MainCamera;
+    private GameObject pictureCamera;
+    SkinnedMeshRenderer[] renderArray;
 
     private void Awake()
     {
         Camera.SetActive(false);
-    }
+        renderArray = MainCamera.transform.GetChild(1).GetChild(1).GetComponentsInChildren<SkinnedMeshRenderer>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        pictureCamera = GameObject.FindGameObjectWithTag("PictureCamera");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse1) && Camera.activeInHierarchy == false && EquipmentScript.isRendered == true)
+        if(Input.GetKeyDown(KeyCode.Mouse1) && Camera.activeInHierarchy == false)
         {
+            foreach (SkinnedMeshRenderer renderer in renderArray)
+            {
+                renderer.enabled = false;
+            }
+
+            pictureCamera.SetActive(false);
+
             Camera.SetActive(true);
-            EquipmentScript.ToggleVisiblity();
         }
         else if(Input.GetKeyDown(KeyCode.Mouse1) && Camera.activeInHierarchy == true)
         {
+            foreach (SkinnedMeshRenderer renderer in renderArray)
+            {
+                renderer.enabled = true;
+            }
+
+            pictureCamera.SetActive(true);
+
             Camera.SetActive(false);
-            EquipmentScript.ToggleVisiblity();
         }
         else if(Input.GetKeyDown(KeyCode.Mouse0) && Camera.activeInHierarchy == true)
         {

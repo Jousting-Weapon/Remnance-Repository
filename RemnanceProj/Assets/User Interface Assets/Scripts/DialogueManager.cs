@@ -67,9 +67,6 @@ public class DialogueManager : MonoBehaviour
 
     void Awake()
     {
-        // For Animation
-        playerArms.SetActive(false);
-
         CheckGameStateValidity();
 
         subtitlesText = transform.GetChild(0).GetComponent<Text>();
@@ -119,6 +116,9 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
+        // For Animation
+        playerArms.SetActive(false);
+
         AudioSource source2 = gameObject.AddComponent<AudioSource>();
         source2.volume = 0.05f;
         source2.loop = true;
@@ -199,6 +199,12 @@ public class DialogueManager : MonoBehaviour
         {
             playerArms.SetActive(true);
             armAnimator.SetBool("InComms", !armAnimator.GetBool("InComms"));
+        } 
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            playerArms.SetActive(true);
+            armAnimator.SetBool("CameraEquip", !armAnimator.GetBool("CameraEquip"));
         }
 
         if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)

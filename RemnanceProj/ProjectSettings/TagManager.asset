@@ -12,6 +12,7 @@ TagManager:
   - Pickup
   - Point
   - ItemName
+  - PictureCamera
   layers:
   - Default
   - TransparentFX
