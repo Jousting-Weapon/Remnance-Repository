@@ -11,6 +11,9 @@ public class DialogueManager : MonoBehaviour
     public Animator armAnimator;
     public GameObject playerArms;
 
+    private GameObject pictureCamera;
+    private bool pictureBool = false;
+
     public int test = 9; // TODO: DELETE ME
     private const int Q_INPUT = 1;
     private const int MOUSE_INPUT = 2;
@@ -67,6 +70,8 @@ public class DialogueManager : MonoBehaviour
 
     void Awake()
     {
+        pictureCamera = GameObject.FindGameObjectWithTag("PictureCamera");
+
         CheckGameStateValidity();
 
         subtitlesText = transform.GetChild(0).GetComponent<Text>();
@@ -199,12 +204,24 @@ public class DialogueManager : MonoBehaviour
         {
             playerArms.SetActive(true);
             armAnimator.SetBool("InComms", !armAnimator.GetBool("InComms"));
+
+            pictureCamera.SetActive(false);
         } 
 
         if(Input.GetKeyDown(KeyCode.F))
         {
             playerArms.SetActive(true);
             armAnimator.SetBool("CameraEquip", !armAnimator.GetBool("CameraEquip"));
+
+            if(pictureBool == false)
+            {
+                pictureCamera.SetActive(true);
+                pictureBool = true;
+            }
+            else if(pictureBool == true)
+            {
+                StartCoroutine(AnimationTimer());
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
@@ -429,6 +446,13 @@ public class DialogueManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator AnimationTimer()
+    {
+        yield return new WaitForSeconds(1.5f);
+        pictureCamera.SetActive(false);
+        pictureBool = false;
     }
 
     void UpdateChoices(params string[] input)

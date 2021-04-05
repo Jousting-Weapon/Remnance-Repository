@@ -24,7 +24,7 @@ public class CameraInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse1) && Camera.activeInHierarchy == false)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && Camera.activeInHierarchy == false && pictureCamera.activeInHierarchy == true)
         {
             foreach (SkinnedMeshRenderer renderer in renderArray)
             {
@@ -35,7 +35,7 @@ public class CameraInteraction : MonoBehaviour
 
             Camera.SetActive(true);
         }
-        else if(Input.GetKeyDown(KeyCode.Mouse1) && Camera.activeInHierarchy == true)
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && Camera.activeInHierarchy == true && pictureCamera.activeInHierarchy == false)
         {
             foreach (SkinnedMeshRenderer renderer in renderArray)
             {
