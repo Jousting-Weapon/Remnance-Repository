@@ -19,9 +19,9 @@ public class GuardianSight : MonoBehaviour
     private void RaycastCheck()
     {
         Vector3 origin = transform.position;
-        origin.y = origin.y + 115;
+        origin.y = origin.y + 350;
         Vector3 direction = transform.forward;
-        float maxDistance = 1000f;
+        float maxDistance = 3000f;
 
 
         Debug.DrawRay(origin, direction * maxDistance, Color.red);

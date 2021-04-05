@@ -9,20 +9,23 @@ public class Patrolling : MonoBehaviour{
     int current;
     private NavMeshAgent agent;
 
-   void Start()
+   void Awake()
    {
        agent = GetComponent<NavMeshAgent>();
+       Debug.Log(agent);
        current = 0;
-       agent.speed = 300;
+       agent.speed = 600;
    }
 
    void Update()
    {
        agent.destination = points[current].position;
-       if (agent.transform.position == points[current].position)
+       //Debug.Log(agent.transform.position);
+       if (Mathf.Abs(Vector3.Distance(agent.transform.position, points[current].position)) < 1)
         {
            current = (current + 1) % points.Length;
            agent.destination = points[current].position;
+           Debug.Log(agent.transform.position);
         }
    }
 }
