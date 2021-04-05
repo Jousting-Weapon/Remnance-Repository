@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class MenuElementHover : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class MenuElementHover : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if(cameraMovement.isMoving)
+        if(cameraMovement.inTransition || cameraMovement.inOptionsMenu)
         {
             return;
         }
@@ -35,7 +36,7 @@ public class MenuElementHover : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (cameraMovement.isMoving)
+        if (cameraMovement.inTransition || cameraMovement.inOptionsMenu)
         {
             return;
         }
@@ -45,7 +46,7 @@ public class MenuElementHover : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (cameraMovement.isMoving)
+        if (cameraMovement.inTransition || cameraMovement.inOptionsMenu)
         {
             return;
         }
@@ -55,7 +56,8 @@ public class MenuElementHover : MonoBehaviour
         }
         else if(this.transform.name == "Options Button")
         {
-            Debug.LogError("Lance has not implemented the Options Menu yet. Don't worry ;)");
+            cameraMovement.optionsCutscene = true;
+            //Debug.LogError("Lance has not implemented the Options Menu yet. Don't worry ;)");
         }
         else if (this.transform.name == "Exit Button")
         {
