@@ -5091,6 +5091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armAnimator: {fileID: 1466299405}
   playerArms: {fileID: 1466299404}
+  DialogueChoices: {fileID: 154497285}
   test: 9
   masterMixer: {fileID: 24300002, guid: 4fb6fda462f2dfd4698515337aaf15e4, type: 2}
 --- !u!1 &899868381 stripped

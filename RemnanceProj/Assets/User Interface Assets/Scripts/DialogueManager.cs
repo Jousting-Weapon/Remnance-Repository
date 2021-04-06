@@ -95,6 +95,9 @@ public class DialogueManager : MonoBehaviour
         gameDisplayText.text = "";
         dialogChoicesTransform.gameObject.SetActive(false);
 
+        // Animation Logic
+        armAnimator.SetBool("InComms", false);
+
         timer = 0;
         choices = new string[0];
         selectedChoice = 0;
@@ -200,17 +203,9 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        // When the player presses 'F,' play the Camera animation
+        if(!inTutorial && Input.GetKeyDown(KeyCode.F))
         {
-            playerArms.SetActive(true);
-            armAnimator.SetBool("InComms", !armAnimator.GetBool("InComms"));
-
-            pictureCamera.SetActive(false);
-        } 
-
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            playerArms.SetActive(true);
             armAnimator.SetBool("CameraEquip", !armAnimator.GetBool("CameraEquip"));
 
             if(pictureBool == false)
@@ -233,6 +228,9 @@ public class DialogueManager : MonoBehaviour
             waitingForInput = false;
             selectedChoice = 0;
             currentNode = CreateSiteEntranceDialogueTree();
+
+            // Animation Logic
+            armAnimator.SetBool("InComms", false);
         }
 
         if (Input.GetKeyDown(KeyCode.U) && !inTutorial)
@@ -249,6 +247,9 @@ public class DialogueManager : MonoBehaviour
             audioSource.Stop();
             timer = 0;
             currentNode = CreateCaveEntranceDialogueTree();
+
+            // Animation Logic
+            armAnimator.SetBool("InComms", false);
         }
 
         if (Input.GetKeyDown(KeyCode.I) && !inTutorial)
@@ -264,6 +265,9 @@ public class DialogueManager : MonoBehaviour
             audioSource.Stop();
             timer = 0;
             currentNode = CreateArtifactPictureDialogueTree();
+
+            // Animation Logic
+            armAnimator.SetBool("InComms", false);
         }
 
         if ((inTutorial || inCave) && waitingForInput)
@@ -364,8 +368,12 @@ public class DialogueManager : MonoBehaviour
         {
             if (!isWristCommActive)
             {
+                playerArms.SetActive(true);
                 dialogChoicesTransform.gameObject.SetActive(true);
                 isWristCommActive = true;
+
+                // Animation Logic
+                armAnimator.SetBool("InComms", true);
             }
 
             waitingForInput = false;
@@ -384,6 +392,9 @@ public class DialogueManager : MonoBehaviour
                     dialogChoicesTransform.gameObject.SetActive(false);
                     isWristCommActive = false;
                     canOpenComm = true;
+
+                    // Animation Logic
+                    armAnimator.SetBool("InComms", false);
 
                     if (selectedChoice != -1)
                     {
@@ -410,6 +421,10 @@ public class DialogueManager : MonoBehaviour
                     closeText.gameObject.SetActive(true);
                     isWristCommActive = true;
                     selectedChoice = -1;
+
+                    // Animation Logic
+                    armAnimator.SetBool("InComms", true);
+
                     UpdateSelectionBackground();
                 }
             }
@@ -581,6 +596,9 @@ public class DialogueManager : MonoBehaviour
                 dialogChoicesTransform.gameObject.SetActive(false);
                 isWristCommActive = false;
                 choices = new string[0];
+
+                // Animation Logic
+                armAnimator.SetBool("InComms", false);
             }
             else
             {
@@ -590,12 +608,18 @@ public class DialogueManager : MonoBehaviour
                     isWristCommActive = false;
                     subtitlesText.text = "";
                     gameDisplayText.text = "";
+
+                    // Animation Logic
+                    armAnimator.SetBool("InComms", false);
                 }
                 else
                 {
                     dialogChoicesTransform.gameObject.SetActive(true);
                     UpdateChoices(choices);
                     isWristCommActive = true;
+
+                    // Animation Logic
+                    armAnimator.SetBool("InComms", true);
                 }
             }
         }
@@ -604,6 +628,9 @@ public class DialogueManager : MonoBehaviour
             gameDisplayText.text = "";
             dialogChoicesTransform.gameObject.SetActive(false);
             isWristCommActive = false;
+
+            // Animation Logic
+            armAnimator.SetBool("InComms", false);
 
             DialogueNode node = (DialogueNode)currentNode;
 
@@ -787,7 +814,7 @@ public class DialogueManager : MonoBehaviour
         DialogueNode subtitle_entrance_node_4 = new DialogueNode(DialogueAssets.subtitle_entrance_4, DialogueAssets.clip_entrance_9, DialogueAssets.clip_entrance_10);
         DialogueNode subtitle_entrance_node_5 = new DialogueNode(DialogueAssets.subtitle_entrance_5, DialogueAssets.clip_entrance_11, DialogueAssets.clip_entrance_12);
         DialogueNode subtitle_entrance_node_6 = new DialogueNode(DialogueAssets.subtitle_entrance_6, DialogueAssets.clip_entrance_13, DialogueAssets.clip_entrance_14);
-        TimerNode gameDisplay_entrance_1_node = new TimerNode(DialogueAssets.gameDisplay_entrance_1, 2);
+        TimerNode gameDisplay_entrance_1_node = new TimerNode(DialogueAssets.gameDisplay_entrance_1, 4);
 
         subtitle_entrance_node_1.SetChildren(subtitle_entrance_node_2);
         subtitle_entrance_node_2.SetChildren(subtitle_entrance_node_3);
