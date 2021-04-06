@@ -66,7 +66,7 @@ public static class DialogueAssets
     public static readonly string[] subtitle_entrance_2 = { "PLAYER: This place looks far worse than what those preliminary photos depicted.", "PLAYER: Did we ever recover those probes?", "HANDLER: That...that is a great question.  I...I have no idea." };
     public static readonly string[] subtitle_entrance_3 = { "PLAYER: You're in a state-of-the-art relay booth and you can't tell me if a few probes are still online?", "HANDLER: Well I-", "PLAYER: You know what, it doesn't even matter. Do we have any idea where the artifact is located?" };
     public static readonly string[] subtitle_entrance_4 = { "HANDLER: Yes! Well...I can give you a general location at the very least.", "HANDLER: Site 1 is completely isolated from Sites 2 and 3. You see those mountains around you?" };
-    public static readonly string[] subtitle_entrance_5 = { "PLAYER: ...I'm in the middle of a sandstorm, I can't see 20 feet in front of me, let alone some mountains 'in the distance.'", "HANDLER: Right. Forgot about that. Well suffice to say, the artifact is somewhere in this valley." };
+    public static readonly string[] subtitle_entrance_5 = { "PLAYER: ...I can't see 20 feet in front of me, let alone some mountains 'in the distance.'", "HANDLER: Right. Forgot about that. Well suffice to say, the artifact is somewhere in this valley." };
     public static readonly string[] subtitle_entrance_6 = { "PLAYER: Great. Thanks for all your help.", "HANDLER: Anytime. You know where to find me." };
     public static readonly string gameDisplay_entrance_1 = "Periodically, opening your wrist commlink ('Q') will allow you to ask your Handler questions.";
 
