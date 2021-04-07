@@ -17328,9 +17328,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -891658242937218349, guid: 97aaa1391bbdf024c9046ecb44db78aa, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -891658242937218349, guid: 97aaa1391bbdf024c9046ecb44db78aa, type: 3}
+      propertyPath: m_TagString
+      value: Pickup
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 97aaa1391bbdf024c9046ecb44db78aa, type: 3}
       propertyPath: m_Name
       value: Glaive_004
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97aaa1391bbdf024c9046ecb44db78aa, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97aaa1391bbdf024c9046ecb44db78aa, type: 3}
+      propertyPath: m_TagString
+      value: Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 1347693894949321857, guid: 97aaa1391bbdf024c9046ecb44db78aa, type: 3}
       propertyPath: m_Materials.Array.data[0]
