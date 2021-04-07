@@ -5,12 +5,23 @@ using UnityEngine;
 public class CollisionDetection : MonoBehaviour
 {
     public GameManager gameManager;
+    public GameObject player;
+
+
+    void Awake()
+    {
+        player = GameObject.Find("First Person Player");
+        
+    }
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Collider>().tag == "Player")
         {
-            FindObjectOfType<GameManager>().EndGame();
+            Debug.Log("player collision");
+            player.GetComponent<CharacterController>().enabled = false;
+            player.transform.position = new Vector3(-19413, 440, -21443);
+            player.GetComponent<CharacterController>().enabled = true;
         }
         if (other.GetComponent<Collider>().tag == "Point")
         {

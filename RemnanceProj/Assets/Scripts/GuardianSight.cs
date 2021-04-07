@@ -16,7 +16,7 @@ public class GuardianSight : MonoBehaviour
         player = GameObject.Find("First Person Player");
     }
 
-    private void RaycastCheck()
+    void RaycastCheck()
     {
         Vector3 origin = transform.position;
         origin.y = origin.y + 350;
@@ -36,6 +36,14 @@ public class GuardianSight : MonoBehaviour
         }
     }
 
+    void Chasing()
+    {
+        agent.speed = 400;
+        Debug.Log(player.transform.position);
+        agent.destination = player.transform.position;
+
+    }
+
     void Update()
     {
         RaycastCheck();
@@ -44,12 +52,6 @@ public class GuardianSight : MonoBehaviour
         {
             Chasing();
         }
-    }
-     
-    public void Chasing()
-    {
-        agent.speed = 400;
-        agent.destination = player.transform.position;
+    } 
 
-    }
 }
