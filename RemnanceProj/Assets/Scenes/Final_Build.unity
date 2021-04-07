@@ -471,6 +471,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pitchfork_002
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9635a8bffb1be38468e0177344f5213f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9635a8bffb1be38468e0177344f5213f, type: 3}
+      propertyPath: m_TagString
+      value: Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607557985854582600, guid: 9635a8bffb1be38468e0177344f5213f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607557985854582600, guid: 9635a8bffb1be38468e0177344f5213f, type: 3}
+      propertyPath: m_TagString
+      value: Pickup
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9635a8bffb1be38468e0177344f5213f, type: 3}
 --- !u!4 &64840687 stripped
@@ -508,8 +524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d2a3b9475148f4e983d738be7e114c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  examinePoint: {fileID: 0}
+  mainCamera: {fileID: 6578242212093722011}
+  examinePoint: {fileID: 617308079}
   initialRotationOffset: {x: 0, y: 0, z: 0}
   initialZoom: 1
   zoomRange: {x: 100, y: 200}
@@ -11166,7 +11182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ca65aa2488399d34ea78b25255d1352e, type: 3}
       propertyPath: m_TagString
-      value: Point
+      value: Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 3566390031902043909, guid: ca65aa2488399d34ea78b25255d1352e, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -11175,6 +11191,10 @@ PrefabInstance:
     - target: {fileID: 3779745573541866595, guid: ca65aa2488399d34ea78b25255d1352e, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779745573541866595, guid: ca65aa2488399d34ea78b25255d1352e, type: 3}
+      propertyPath: m_TagString
+      value: Pickup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca65aa2488399d34ea78b25255d1352e, type: 3}
