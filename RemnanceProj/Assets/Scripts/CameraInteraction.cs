@@ -7,24 +7,48 @@ using Image = UnityEngine.UI.Image;
 
 public class CameraInteraction : MonoBehaviour
 {
-    public GameObject Camera;
+    public GameObject CameraUI;
     public Flash FlashScript;
     public GameObject MainCamera;
     private GameObject pictureCamera;
     SkinnedMeshRenderer[] renderArray;
+    public Animator armAnimator;
+
+    private bool pictureBool = false;
+
+    private DialogueManager dialogueManager;
 
     private void Awake()
     {
-        Camera.SetActive(false);
+        CameraUI.SetActive(false);
         renderArray = MainCamera.transform.GetChild(1).GetChild(1).GetComponentsInChildren<SkinnedMeshRenderer>();
 
         pictureCamera = GameObject.FindGameObjectWithTag("PictureCamera");
+        dialogueManager = FindObjectOfType<DialogueManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && Camera.activeInHierarchy == false && pictureCamera.activeInHierarchy == true)
+        // When the player presses 'F,' play the Camera animation
+        if (!dialogueManager.inTutorial && Input.GetKeyDown(KeyCode.F))
+        {
+            armAnimator.SetBool("CameraEquip", !armAnimator.GetBool("CameraEquip"));
+
+            CameraUI.SetActive(false);
+
+            if (pictureBool == false)
+            {
+                pictureCamera.SetActive(true);
+                pictureBool = true;
+            }
+            else if (pictureBool == true)
+            {
+                StartCoroutine(AnimationTimer());
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1) && CameraUI.activeInHierarchy == false && pictureBool == true)
         {
             foreach (SkinnedMeshRenderer renderer in renderArray)
             {
@@ -33,9 +57,11 @@ public class CameraInteraction : MonoBehaviour
 
             pictureCamera.SetActive(false);
 
-            Camera.SetActive(true);
+            pictureBool = false;
+
+            CameraUI.SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && Camera.activeInHierarchy == true && pictureCamera.activeInHierarchy == false)
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && CameraUI.activeInHierarchy == true && pictureBool == false)
         {
             foreach (SkinnedMeshRenderer renderer in renderArray)
             {
@@ -44,11 +70,20 @@ public class CameraInteraction : MonoBehaviour
 
             pictureCamera.SetActive(true);
 
-            Camera.SetActive(false);
+            pictureBool = true;
+
+            CameraUI.SetActive(false);
         }
-        else if(Input.GetKeyDown(KeyCode.Mouse0) && Camera.activeInHierarchy == true)
+        else if(Input.GetKeyDown(KeyCode.Mouse0) && CameraUI.activeInHierarchy == true)
         {
             FlashScript.doCameraFlash = true;
         }
+    }
+
+    IEnumerator AnimationTimer()
+    {
+        pictureBool = false;
+        yield return new WaitForSeconds(1.5f);
+        pictureCamera.SetActive(false);
     }
 }

@@ -12,12 +12,13 @@ public class DialogueManager : MonoBehaviour
     public GameObject playerArms;
 
     private GameObject pictureCamera;
-    private bool pictureBool = false;
 
     public int test = 9; // TODO: DELETE ME
     private const int Q_INPUT = 1;
     private const int MOUSE_INPUT = 2;
     private const int WASD_INPUT = 60;
+    private const int F_INPUT = 64;
+    private const int PICTURE_INPUT = 448;
 
     private float charSize;
     private int maxCharsPerLine;
@@ -55,7 +56,7 @@ public class DialogueManager : MonoBehaviour
 
     private float nodeTimer;
 
-    private bool inTutorial;
+    public bool inTutorial { get; private set; }
     private bool inEntrance;
     private bool inCave;
     private bool inEndGame;
@@ -151,7 +152,7 @@ public class DialogueManager : MonoBehaviour
         maxCharsPerLine = (int)(choicesText.gameObject.GetComponent<RectTransform>().rect.width / charSize) + 2; // make slightly longer
         selectionBoxPadding = 15;
 
-        Debug.Log("Collison detection not yet implemented. Press: Y for site entrance, U for cave entrance, I for artifact picture... Press WASD to 'pick up' artifact for now");
+        Debug.Log("Press: Y for site entrance, U for cave entrance, I for artifact picture... Press WASD to 'pick up' artifact for now");
     }
 
     void FixedUpdate()
@@ -208,22 +209,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        // When the player presses 'F,' play the Camera animation
-        if(!inTutorial && Input.GetKeyDown(KeyCode.F))
-        {
-            armAnimator.SetBool("CameraEquip", !armAnimator.GetBool("CameraEquip"));
-
-            if(pictureBool == false)
-            {
-                pictureCamera.SetActive(true);
-                pictureBool = true;
-            }
-            else if(pictureBool == true)
-            {
-                StartCoroutine(AnimationTimer());
-            }
-        }
-
+        /*
         if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
         {
             TriggerSiteEntrance();
@@ -237,6 +223,46 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I) && !inTutorial)
         {
             TriggerArtifactDialogue();
+        }
+        */
+
+        if (waitingForInput && !inTutorial && !inEntrance && !inCave)
+        {
+            // NOTE: Pressing Q or another input will remove this input...may be a problem for future
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if ((userInputFlag & 0x40) == 0)
+                {
+                    userInputFlag = userInputFlag | 0x40;
+                }
+                else
+                {
+                    userInputFlag = userInputFlag & 0x3F;
+                }
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                // If the F key is not active or the camera UI is active
+                if ((userInputFlag & 0x40) == 0 || (userInputFlag & 0x80) != 0)
+                {
+                    // "Deactivate" camera UI
+                    userInputFlag = userInputFlag & 0x7F;
+                }
+                else
+                {
+                    userInputFlag = userInputFlag | 0x80;
+                }
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                // If the F key is active and the camera UI is active
+                if ((userInputFlag & 0x40) != 0 && (userInputFlag & 0x80) != 0)
+                {
+                    userInputFlag = userInputFlag | 0x100;
+                }
+            }
         }
 
         if ((inTutorial || inEndGame) && waitingForInput)
@@ -338,6 +364,7 @@ public class DialogueManager : MonoBehaviour
             if (!isWristCommActive)
             {
                 playerArms.SetActive(true);
+                pictureCamera.SetActive(false);
                 dialogChoicesTransform.gameObject.SetActive(true);
                 isWristCommActive = true;
 
@@ -378,7 +405,7 @@ public class DialogueManager : MonoBehaviour
             currentNode = currentNode.GetNextChild(selectedChoice);
             selectedChoice = 0;
             DisplayNextSentence();
-            userInputFlag = 0;
+            userInputFlag = userInputFlag & 0xC0;
         }
 
         if (!inTutorial && !inEntrance && !inEndGame)
@@ -461,13 +488,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    IEnumerator AnimationTimer()
-    {
-        yield return new WaitForSeconds(1.5f);
-        pictureCamera.SetActive(false);
-        pictureBool = false;
-    }
-
     void UpdateChoices(params string[] input)
     {
         choicesText.text = "";
@@ -527,8 +547,8 @@ public class DialogueManager : MonoBehaviour
         {
             selectedChoiceBackground.transform.localPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, closeText.GetComponent<RectTransform>().localPosition.y, 0);
 
-            selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (int)((closeText.GetComponent<TextMeshProUGUI>().text.Length * charSize) + 2 * selectionBoxPadding));
-            selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, closeText.GetComponent<TextMeshProUGUI>().textInfo.lineInfo[0].lineHeight + verticalPadding);
+            selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (int)((closeText.GetComponent<TextMeshProUGUI>().text.Length * charSize) + 2 * selectionBoxPadding + 5));
+            selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, closeText.GetComponent<TextMeshProUGUI>().textInfo.lineInfo[0].lineHeight + verticalPadding + 5);
 
             //scrollBar.transform.localPosition = new Vector3(scrollBar.GetComponent<RectTransform>().anchoredPosition.x, choicesText.GetComponent<RectTransform>().localPosition.y + diff, 0);
             //scrollBar.transform.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scrollBar.transform.GetComponent<RectTransform>().sizeDelta.x + diff);
@@ -550,7 +570,7 @@ public class DialogueManager : MonoBehaviour
             scrollHeight += choicesText.textInfo.lineInfo[index].lineHeight;
         }
 
-        while (curLength > 0)
+        while (curLength > 1)
         {
             maxLength = maxCharsPerLine;
 
@@ -558,7 +578,7 @@ public class DialogueManager : MonoBehaviour
             tempHeight += choicesText.textInfo.lineInfo[tempIndex++].lineHeight;
         }
 
-        int tempWidth = (int)((maxLength * charSize) + 2 * selectionBoxPadding);
+        int tempWidth = (int)(choicesText.GetComponent<RectTransform>().rect.width + 2 * selectionBoxPadding);//(int)((maxLength * charSize) + 2 * selectionBoxPadding);
 
         selectedChoiceBackground.transform.localPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, choicesText.GetComponent<RectTransform>().localPosition.y - (yOffset) - test * selectedChoice, 0);
 
@@ -897,12 +917,23 @@ public class DialogueManager : MonoBehaviour
         DialogueNode subtitle_tree_2_c2_a_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_2_c2_a, DialogueAssets.clip_exploration_tree_2_choice_2, DialogueAssets.clip_exploration_tree_2_c2_a);
         DialogueNode subtitle_tree_2_c2_b_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_2_c2_b, DialogueAssets.clip_exploration_tree_2_c2_b, DialogueAssets.clip_exploration_tree_2_c2_c, DialogueAssets.clip_exploration_tree_2_c2_d);
 
-        choice_tree_1_node.SetChildren(subtitle_tree_1_c1_node, subtitle_tree_1_c2_a_node);
+        // Choice - Camera Locked?
+        DialogueNode subtitle_tree_1_c3_a_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c3_a, DialogueAssets.clip_exploration_tree_1_choice_3_a, DialogueAssets.clip_exploration_tree_1_choice_3_b);
+        PromptNode display1 = new PromptNode(DialogueAssets.subtitle_exploration_tree_1_c3_display_1, F_INPUT);
+        DialogueNode subtitle_tree_1_c3_b_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c3_b, DialogueAssets.clip_exploration_tree_1_choice_3_c);
+        PromptNode display2 = new PromptNode(DialogueAssets.subtitle_exploration_tree_1_c3_display_2, PICTURE_INPUT);
+        DialogueNode subtitle_tree_1_c3_c_node = new DialogueNode(DialogueAssets.subtitle_exploration_tree_1_c3_c, DialogueAssets.clip_exploration_tree_1_choice_3_d);
+
+        choice_tree_1_node.SetChildren(subtitle_tree_1_c1_node, subtitle_tree_1_c2_a_node, subtitle_tree_1_c3_a_node);
         subtitle_tree_1_c1_node.SetChildren(choice_tree_2_node);
         subtitle_tree_1_c2_a_node.SetChildren(subtitle_tree_1_c2_b_node);
         subtitle_tree_1_c2_b_node.SetChildren(subtitle_tree_1_c2_c_node);
         choice_tree_2_node.SetChildren(subtitle_tree_2_c1_node, subtitle_tree_2_c2_a_node);
         subtitle_tree_2_c2_a_node.SetChildren(subtitle_tree_2_c2_b_node);
+        subtitle_tree_1_c3_a_node.SetChildren(display1);
+        display1.SetChildren(subtitle_tree_1_c3_b_node);
+        subtitle_tree_1_c3_b_node.SetChildren(display2);
+        display2.SetChildren(subtitle_tree_1_c3_c_node);
 
         return choice_tree_1_node;
     }
