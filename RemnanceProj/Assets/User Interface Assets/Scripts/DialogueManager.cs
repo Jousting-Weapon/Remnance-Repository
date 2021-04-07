@@ -570,7 +570,7 @@ public class DialogueManager : MonoBehaviour
             scrollHeight += choicesText.textInfo.lineInfo[index].lineHeight;
         }
 
-        while (curLength > 1)
+        while (curLength > 2)
         {
             maxLength = maxCharsPerLine;
 
