@@ -62,10 +62,12 @@ public class MenuElementHover : MonoBehaviour
         else if (this.transform.name == "Exit Button")
         {
             Application.Quit();
-            if(Application.isEditor)
+
+            // DISABLE BEFORE BUILDING!
+            /**if(Application.isEditor)
             {
                 EditorApplication.isPlaying = false;
-            }
+            }*/
         }
     }
 

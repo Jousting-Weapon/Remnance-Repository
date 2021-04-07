@@ -30599,6 +30599,7 @@ GameObject:
   - component: {fileID: 2529852958687040084}
   - component: {fileID: 4867246620065669522}
   - component: {fileID: 3888207997018306346}
+  - component: {fileID: 5213856849849596425}
   m_Layer: 0
   m_Name: polySurface156
   m_TagString: Untagged
@@ -30606,6 +30607,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!64 &5213856849849596425
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213856849849596424}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6524504847630650252, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
 --- !u!33 &5219324604401092004
 MeshFilter:
   m_ObjectHideFlags: 0
