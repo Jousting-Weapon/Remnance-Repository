@@ -6,10 +6,19 @@ public class GameManager : MonoBehaviour
     public bool gameHasEnded = false;
     public float restartDelay = 1f;
     public GameObject completeLevelUI;
+    public bool pickedUpFinalObject = false;
 
     public void CompleteLevel()
     {
-        completeLevelUI.SetActive(true);
+        if(pickedUpFinalObject == true)
+        {
+            completeLevelUI.SetActive(true);
+        }
+    }
+
+    public void FinalObjectTrigger()
+    {
+        pickedUpFinalObject = true;
     }
 
     public void EndGame()
@@ -25,5 +34,4 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
 }
