@@ -7,6 +7,10 @@ public class FinalCubeTrigger : MonoBehaviour
     void OnTriggerEnter()
     {
         gameManager.FinalObjectTrigger();
+
+        FindObjectOfType<DialogueManager>().TriggerArtifactDialogue();
+
+        Destroy(gameObject);
     }
 
 }

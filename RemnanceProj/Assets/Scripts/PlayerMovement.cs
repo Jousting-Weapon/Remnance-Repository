@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        Debug.Log("isGrounded = " + isGrounded);
 
         if(isGrounded && velocity.y < 0)
         {
@@ -41,5 +40,20 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "SiteEntranceTrigger")
+        {
+            FindObjectOfType<DialogueManager>().TriggerSiteEntrance();
+            Destroy(other.gameObject);
+        }
+        else if (other.name == "CaveEntranceTrigger")
+        {
+            FindObjectOfType<DialogueManager>().TriggerCaveEntrance();
+
+            Destroy(other.transform.parent.gameObject);
+        }
     }
 }

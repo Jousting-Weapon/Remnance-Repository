@@ -28,7 +28,7 @@ public class DialogueManager : MonoBehaviour
     private Transform dialogChoicesTransform;
     private Transform selectedChoiceBackground;
     private TextMeshProUGUI choicesText;
-    private Scrollbar scrollBar;
+    //private Scrollbar scrollBar;
     private Transform closeText;
 
     private int userInputFlag;
@@ -58,6 +58,10 @@ public class DialogueManager : MonoBehaviour
     private bool inTutorial;
     private bool inEntrance;
     private bool inCave;
+    private bool inEndGame;
+    private bool saidNo; // TEMP REMOVE LATER
+
+    public bool finalItemVisible;
 
     /// <summary>
     /// A dictionary whose keys are the indexes of the choices and whose values are the number of lines before it
@@ -81,7 +85,7 @@ public class DialogueManager : MonoBehaviour
         selectedChoiceBackground = dialogChoicesTransform.GetChild(0);
         choicesText = dialogChoicesTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
         choicesText.text = "";
-        scrollBar = dialogChoicesTransform.GetChild(2).GetComponent<Scrollbar>();
+        //scrollBar = dialogChoicesTransform.GetChild(2).GetComponent<Scrollbar>();
         closeText = dialogChoicesTransform.GetChild(3);
         closeText.gameObject.SetActive(false);
 
@@ -115,6 +119,8 @@ public class DialogueManager : MonoBehaviour
         nodeTimer = 0;
         inEntrance = false;
         inCave = false;
+        inEndGame = false;
+        saidNo = false;
 
         currentChoices = new Dictionary<int, int>();
         explorationChoices = new List<Tuple<TreeNode, string>>();
@@ -172,7 +178,6 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
-                    inTutorial = false;
                     subtitlesText.text = "";
                     canOpenComm = true;
                 }
@@ -221,56 +226,20 @@ public class DialogueManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
         {
-            // TODO: USE COLLISION TRIGGER - SITE ENTRANCE
-            explorationChoices.Clear();
-            dialogChoicesTransform.gameObject.SetActive(false);
-            inEntrance = true;
-            waitingForInput = false;
-            selectedChoice = 0;
-            currentNode = CreateSiteEntranceDialogueTree();
-
-            // Animation Logic
-            armAnimator.SetBool("InComms", false);
+            TriggerSiteEntrance();
         }
 
         if (Input.GetKeyDown(KeyCode.U) && !inTutorial)
         {
-            // TODO: USE COLLISION TRIGGER - CAVE ENTRANCE
-            explorationChoices.Clear();
-            dialogChoicesTransform.gameObject.SetActive(false);
-            waitingForInput = false;
-            canOpenComm = false;
-            inCave = true;
-            selectedChoice = 0;
-            subtitlesText.text = "";
-            gameDisplayText.text = "";
-            audioSource.Stop();
-            timer = 0;
-            currentNode = CreateCaveEntranceDialogueTree();
-
-            // Animation Logic
-            armAnimator.SetBool("InComms", false);
+            TriggerCaveEntrance();
         }
 
         if (Input.GetKeyDown(KeyCode.I) && !inTutorial)
         {
-            // TODO: USE COLLISION TRIGGER - ARTIFACT PICTURE
-            explorationChoices.Clear();
-            dialogChoicesTransform.gameObject.SetActive(false);
-            waitingForInput = false;
-            canOpenComm = false;
-            selectedChoice = 0;
-            subtitlesText.text = "";
-            gameDisplayText.text = "";
-            audioSource.Stop();
-            timer = 0;
-            currentNode = CreateArtifactPictureDialogueTree();
-
-            // Animation Logic
-            armAnimator.SetBool("InComms", false);
+            TriggerArtifactDialogue();
         }
 
-        if ((inTutorial || inCave) && waitingForInput)
+        if ((inTutorial || inEndGame) && waitingForInput)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -376,6 +345,35 @@ public class DialogueManager : MonoBehaviour
                 armAnimator.SetBool("InComms", true);
             }
 
+            if (inEndGame)
+            {
+                if (selectedChoice == 1)
+                {
+                    // "take" artifact
+                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Pickup"))
+                    {
+                        if (obj.name == "FinalCube")
+                            Destroy(obj);
+                    }
+                }
+                else
+                {
+                    if (saidNo)
+                    {
+                        // "take" artifact
+                        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Pickup"))
+                        {
+                            if (obj.name == "FinalCube")
+                                Destroy(obj);
+                        }
+                    }
+                    else
+                    {
+                        saidNo = true;
+                    }
+                }
+            }
+
             waitingForInput = false;
             currentNode = currentNode.GetNextChild(selectedChoice);
             selectedChoice = 0;
@@ -383,7 +381,7 @@ public class DialogueManager : MonoBehaviour
             userInputFlag = 0;
         }
 
-        if (!inTutorial && !inEntrance && !inCave)
+        if (!inTutorial && !inEntrance && !inEndGame)
         {
             if (Input.GetKeyDown(KeyCode.Q) && canOpenComm)
             {
@@ -532,8 +530,8 @@ public class DialogueManager : MonoBehaviour
             selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (int)((closeText.GetComponent<TextMeshProUGUI>().text.Length * charSize) + 2 * selectionBoxPadding));
             selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, closeText.GetComponent<TextMeshProUGUI>().textInfo.lineInfo[0].lineHeight + verticalPadding);
 
-            scrollBar.transform.localPosition = new Vector3(scrollBar.GetComponent<RectTransform>().anchoredPosition.x, choicesText.GetComponent<RectTransform>().localPosition.y + diff, 0);
-            scrollBar.transform.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scrollBar.transform.GetComponent<RectTransform>().sizeDelta.x + diff);
+            //scrollBar.transform.localPosition = new Vector3(scrollBar.GetComponent<RectTransform>().anchoredPosition.x, choicesText.GetComponent<RectTransform>().localPosition.y + diff, 0);
+            //scrollBar.transform.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scrollBar.transform.GetComponent<RectTransform>().sizeDelta.x + diff);
             
             return;
         }
@@ -572,8 +570,8 @@ public class DialogueManager : MonoBehaviour
             scrollHeight += choicesText.textInfo.lineInfo[index].lineHeight;
         }
 
-        scrollBar.transform.localPosition = new Vector3(scrollBar.GetComponent<RectTransform>().anchoredPosition.x, choicesText.GetComponent<RectTransform>().localPosition.y + verticalPadding, 0);
-        scrollBar.transform.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scrollHeight + choicesText.textInfo.lineCount * verticalPadding);
+        //scrollBar.transform.localPosition = new Vector3(scrollBar.GetComponent<RectTransform>().anchoredPosition.x, choicesText.GetComponent<RectTransform>().localPosition.y + verticalPadding, 0);
+        //scrollBar.transform.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scrollHeight + choicesText.textInfo.lineCount * verticalPadding);
 
         //iTween.MoveTo(textBackground, new Vector3(375, -1 * backgroundHeight * currentChoices[selectedChoiceIndex] + 240, 0), 1);
     }
@@ -691,6 +689,58 @@ public class DialogueManager : MonoBehaviour
             choices = newChoices;
             UpdateChoices(-1, choices);
         }
+    }
+
+    public void TriggerSiteEntrance()
+    {
+        explorationChoices.Clear();
+        dialogChoicesTransform.gameObject.SetActive(false);
+        inEntrance = true;
+        inTutorial = false;
+        waitingForInput = false;
+        selectedChoice = 0;
+        currentNode = CreateSiteEntranceDialogueTree();
+
+        // Animation Logic
+        armAnimator.SetBool("InComms", false);
+    }
+
+    public void TriggerCaveEntrance()
+    {
+        explorationChoices.Clear();
+        dialogChoicesTransform.gameObject.SetActive(false);
+        waitingForInput = false;
+        canOpenComm = false;
+        inEntrance = false;
+        inCave = true;
+        selectedChoice = 0;
+        subtitlesText.text = "";
+        gameDisplayText.text = "";
+        audioSource.Stop();
+        timer = 0;
+        currentNode = CreateCaveEntranceDialogueTree();
+
+        // Animation Logic
+        armAnimator.SetBool("InComms", false);
+    }
+
+    public void TriggerArtifactDialogue()
+    {
+        explorationChoices.Clear();
+        dialogChoicesTransform.gameObject.SetActive(false);
+        waitingForInput = false;
+        canOpenComm = false;
+        selectedChoice = 0;
+        subtitlesText.text = "";
+        gameDisplayText.text = "";
+        audioSource.Stop();
+        timer = 0;
+        inEndGame = true;
+        closeText.gameObject.SetActive(false);
+        currentNode = CreateArtifactPictureDialogueTree();
+
+        // Animation Logic
+        armAnimator.SetBool("InComms", false);
     }
 
     /// <summary>
@@ -864,7 +914,7 @@ public class DialogueManager : MonoBehaviour
 
         ChoiceNode choice_node = new ChoiceNode(DialogueAssets.choice_cave_tree_1);
 
-        DialogueNode tree_1_choice_1_node = new DialogueNode(DialogueAssets.subtitle_cave_tree_1_c1, DialogueAssets.clip_cave_tree_1_choice_1a, DialogueAssets.clip_cave_tree_1_choice_1b, DialogueAssets.clip_cave_tree_1_choice_1c);
+        DialogueNode tree_1_choice_1_node = new DialogueNode(DialogueAssets.subtitle_cave_tree_1_c1, DialogueAssets.clip_cave_tree_1_choice_1a, DialogueAssets.clip_cave_tree_1_choice_1b, DialogueAssets.clip_cave_tree_1_choice_1c, DialogueAssets.clip_cave_tree_1_choice_1d);
         DialogueNode tree_1_choice_2_node_a = new DialogueNode(DialogueAssets.subtitle_cave_tree_1_c2a, DialogueAssets.clip_cave_tree_1_choice_2a, DialogueAssets.clip_cave_tree_1_choice_2b, DialogueAssets.clip_cave_tree_1_choice_2c, DialogueAssets.clip_cave_tree_1_choice_2d);
         DialogueNode tree_1_choice_2_node_b = new DialogueNode(DialogueAssets.subtitle_cave_tree_1_c2b, DialogueAssets.clip_cave_tree_1_choice_2e, DialogueAssets.clip_cave_tree_1_choice_2f, DialogueAssets.clip_cave_tree_1_choice_2g, DialogueAssets.clip_cave_tree_1_choice_2h, DialogueAssets.clip_cave_tree_1_choice_2i);
 
@@ -887,12 +937,12 @@ public class DialogueManager : MonoBehaviour
 
         DialogueNode t1_c1_node_a = new DialogueNode(DialogueAssets.subtitle_artifact_tree_1_c_1, DialogueAssets.clip_artifact_t1_c1);
         DialogueNode t1_c1_node_b = new DialogueNode(DialogueAssets.subtitle_artifact_tree_1_c1_a, DialogueAssets.clip_artifact_t1_c1_a, DialogueAssets.clip_artifact_t1_c1_b);
-        PromptNode t1_c1_choice_node = new PromptNode(new string[] { "" }, WASD_INPUT); // TODO: Change input to picking up object
+        PromptNode t1_c1_choice_node = new PromptNode(new string[] { "" }, 0); // TODO: Change input to picking up object
         DialogueNode t1_c1_node_c = new DialogueNode(DialogueAssets.subtitle_artifact_tree_2, DialogueAssets.clip_artifact_t2);
 
         DialogueNode t1_c2_node_a = new DialogueNode(DialogueAssets.subtitle_artifact_tree_1_c_2, DialogueAssets.clip_artifact_t1_c2);
         DialogueNode t1_c2_node_b = new DialogueNode(DialogueAssets.subtitle_artifact_tree_1_c2_a, DialogueAssets.clip_artifact_t1_c2_a);
-        PromptNode t1_c2_choice_node = new PromptNode(new string[] { "" }, WASD_INPUT); // TODO: Change input to picking up artifact
+        PromptNode t1_c2_choice_node = new PromptNode(new string[] { "" }, 0); // TODO: Change input to picking up artifact
         DialogueNode t1_c2_node_c = new DialogueNode(DialogueAssets.substitle_artifact_tree_1_c2_b, DialogueAssets.clip_artifact_t1_c2_b);
 
         DialogueNode post_artifact = new DialogueNode(DialogueAssets.subtitle_artifact_retrieved, DialogueAssets.clip_artifact_retrieved_1, DialogueAssets.clip_artifact_retrieved_2, DialogueAssets.clip_artifact_retrieved_3);

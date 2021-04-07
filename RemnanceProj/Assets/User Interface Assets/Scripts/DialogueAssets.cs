@@ -127,37 +127,38 @@ public static class DialogueAssets
     #endregion
 
     #region Cave
-    public static readonly string[] subtitle_cave_1 = { "PLAYER: Whoa...what's this?", "HANDLER: Uhh...wait. Where are you? I just lost visual.", "PLAYER: Check your topographical telemetry genius, I just entered some sort of cave system." };
-    public static readonly string[] subtitle_cave_2 = { "HANDLER: Pssh, I knew that. You think the artifact's in here?", "PLAYER: Yeah I do.", "PLAYER: The briefing said the artifact was relatively preserved.", "PLAYER: With the sandstorm going on outside I figured it would be in a building. This makes much more sense." };
+    public static readonly string[] subtitle_cave_1 = { "PLAYER: Whoa...what's this?", "HANDLER: Uhh...wait. Where are you? I just lost visual.", "PLAYER: Check your telemetry genius, I just entered some sort of cave system." };
+    public static readonly string[] subtitle_cave_2 = { "HANDLER: Pssh, I knew that. You think the artifact's in here?", "PLAYER: Yeah I do.", "PLAYER: The briefing said the artifact was relatively preserved. With the sandstorm going on outside I figured it would be in a building.", "PLAYER: This makes much more sense." };
 
     public static readonly string[] choice_cave_tree_1 = { "Are there Relic Guardians in here?", "Have you ever been in the field?" };
 
-    public static readonly string[] subtitle_cave_tree_1_c1 = { "PLAYER: Any idea if those Relic Guardians are in here?", "HANDLER: No idea. And until the interference from this sandstorm goes away I'm not gonna be able to tell you.", "PLAYER: Okay. Very helpful as always." };
+    public static readonly string[] subtitle_cave_tree_1_c1 = { "PLAYER: Any idea if those Relic Guardians are in here?", "HANDLER: No idea. And until the interference from this sandstorm goes away I'm not gonna be able to tell you.", "PLAYER: Okay. Very helpful as always.", "HANDLER: Of course. It's what I'm here for."};
     public static readonly string[] subtitle_cave_tree_1_c2a = { "PLAYER: Have you ever been in the field?", "HANDLER: Hahaha...wait, are you being serious right now?", "PLAYER: I was trying to be.", "HANDLER: Oh. Well in that case, no. No I've never been deployed before." };
     public static readonly string[] subtitle_cave_tree_1_c2b = { "HANDLER: The 'dream' of being an overworked Trekker was lost on me.", "PLAYER: Ouch.", "HANDLER: Hey, you asked. Besides, I get paid just as much as you do, and I don't ever have to set foot on some dusty planet.", "PLAYER: So you're only in it for the credits.", "HANDLER: Are you not?" };
 
     // Audio
-    public static readonly AudioClip clip_cave_1 = Resources.Load<AudioClip>("CaveScene/PHA_Clip_01");
-    public static readonly AudioClip clip_cave_2 = Resources.Load<AudioClip>("CaveScene/PHA_Clip_02");
-    public static readonly AudioClip clip_cave_3 = Resources.Load<AudioClip>("CaveScene/PHA_Clip_03");
-    public static readonly AudioClip clip_cave_4 = Resources.Load<AudioClip>("CaveScene/PHA_Clip_04");
-    public static readonly AudioClip clip_cave_5a = Resources.Load<AudioClip>("CaveScene/PHA_Clip_05a");
-    public static readonly AudioClip clip_cave_5b = Resources.Load<AudioClip>("CaveScene/PHA_Clip_05b");
-    public static readonly AudioClip clip_cave_5c = Resources.Load<AudioClip>("CaveScene/PHA_Clip_05c");
+    public static readonly AudioClip clip_cave_1 = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_1");
+    public static readonly AudioClip clip_cave_2 = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_2");
+    public static readonly AudioClip clip_cave_3 = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_3");
+    public static readonly AudioClip clip_cave_4 = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_4");
+    public static readonly AudioClip clip_cave_5a = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_5a");
+    public static readonly AudioClip clip_cave_5b = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_5b");
+    public static readonly AudioClip clip_cave_5c = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_5c");
 
-    public static readonly AudioClip clip_cave_tree_1_choice_1a = Resources.Load<AudioClip>("CaveScene/PHA_Clip_6");
-    public static readonly AudioClip clip_cave_tree_1_choice_1b = Resources.Load<AudioClip>("CaveScene/PHA_Clip_7");
-    public static readonly AudioClip clip_cave_tree_1_choice_1c = Resources.Load<AudioClip>("CaveScene/PHA_Clip_8");
+    public static readonly AudioClip clip_cave_tree_1_choice_1a = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_6");
+    public static readonly AudioClip clip_cave_tree_1_choice_1b = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_7");
+    public static readonly AudioClip clip_cave_tree_1_choice_1c = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_8");
+    public static readonly AudioClip clip_cave_tree_1_choice_1d = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_9");
 
-    public static readonly AudioClip clip_cave_tree_1_choice_2a = Resources.Load<AudioClip>("CaveScene/PHA_Clip_9");
-    public static readonly AudioClip clip_cave_tree_1_choice_2b = Resources.Load<AudioClip>("CaveScene/PHA_Clip_10");
-    public static readonly AudioClip clip_cave_tree_1_choice_2c = Resources.Load<AudioClip>("CaveScene/PHA_Clip_11");
-    public static readonly AudioClip clip_cave_tree_1_choice_2d = Resources.Load<AudioClip>("CaveScene/PHA_Clip_12a");
-    public static readonly AudioClip clip_cave_tree_1_choice_2e = Resources.Load<AudioClip>("CaveScene/PHA_Clip_12b");
-    public static readonly AudioClip clip_cave_tree_1_choice_2f = Resources.Load<AudioClip>("CaveScene/PHA_Clip_13");
-    public static readonly AudioClip clip_cave_tree_1_choice_2g = Resources.Load<AudioClip>("CaveScene/PHA_Clip_14");
-    public static readonly AudioClip clip_cave_tree_1_choice_2h = Resources.Load<AudioClip>("CaveScene/PHA_Clip_15");
-    public static readonly AudioClip clip_cave_tree_1_choice_2i = Resources.Load<AudioClip>("CaveScene/PHA_Clip_16");
+    public static readonly AudioClip clip_cave_tree_1_choice_2a = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_10");
+    public static readonly AudioClip clip_cave_tree_1_choice_2b = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_11");
+    public static readonly AudioClip clip_cave_tree_1_choice_2c = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_12");
+    public static readonly AudioClip clip_cave_tree_1_choice_2d = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_13a");
+    public static readonly AudioClip clip_cave_tree_1_choice_2e = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_13b");
+    public static readonly AudioClip clip_cave_tree_1_choice_2f = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_14");
+    public static readonly AudioClip clip_cave_tree_1_choice_2g = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_15");
+    public static readonly AudioClip clip_cave_tree_1_choice_2h = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_16");
+    public static readonly AudioClip clip_cave_tree_1_choice_2i = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_17");
     #endregion
 
     #region Artifact
