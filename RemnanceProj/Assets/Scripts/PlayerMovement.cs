@@ -92,10 +92,10 @@ public class PlayerMovement : MonoBehaviour
     public void onExitButtonClick()
     {
         Application.Quit();
-        if(Application.isEditor)
+        /**if(Application.isEditor)
             {
                 EditorApplication.isPlaying = false;
-            }
+            }*/
     }
 
     public void onMenuButtonClick()
