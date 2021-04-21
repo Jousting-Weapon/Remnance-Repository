@@ -15,7 +15,7 @@ public class Patrolling : MonoBehaviour
        agent = GetComponent<NavMeshAgent>();
        //Debug.Log(agent);
        current = 0;
-       agent.speed = 600;
+       agent.speed = 10;
    }
 
    void Update()

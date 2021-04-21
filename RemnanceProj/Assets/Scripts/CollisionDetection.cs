@@ -20,7 +20,7 @@ public class CollisionDetection : MonoBehaviour
         {
             Debug.Log("player collision");
             player.GetComponent<CharacterController>().enabled = false;
-            player.transform.position = new Vector3(-19413, 440, -21443);
+            player.transform.position = new Vector3(-467, 7, -526);
             player.GetComponent<CharacterController>().enabled = true;
         }
         if (other.GetComponent<Collider>().tag == "Point")
