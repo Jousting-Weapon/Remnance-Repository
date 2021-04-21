@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using UnityEditor;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,13 +14,42 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public GameObject pauseMenu;
+
+    private bool isPaused;
 
     Vector3 velocity;
     bool isGrounded;
 
+    private void Awake()
+    {
+        pauseMenu.SetActive(false);
+        isPaused = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(!isPaused)
+            {
+                pauseMenu.SetActive(true);
+                isPaused = true;
+                Time.timeScale = 0f;
+                Cursor.lockState = CursorLockMode.Confined;
+                
+            }
+            else if (isPaused)
+            {
+                pauseMenu.SetActive(false);
+                isPaused = false;
+                Time.timeScale = 1f;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            
+        }
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if(isGrounded && velocity.y < 0)
@@ -55,5 +87,20 @@ public class PlayerMovement : MonoBehaviour
 
             Destroy(other.transform.parent.gameObject);
         }
+    }
+
+    public void onExitButtonClick()
+    {
+        Application.Quit();
+        if(Application.isEditor)
+            {
+                EditorApplication.isPlaying = false;
+            }
+    }
+
+    public void onMenuButtonClick()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("_Menu_Scene");
     }
 }
