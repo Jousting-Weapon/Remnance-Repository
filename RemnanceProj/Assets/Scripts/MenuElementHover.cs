@@ -52,7 +52,7 @@ public class MenuElementHover : MonoBehaviour
         }
         if (this.transform.name == "Start Button")
         {
-            SceneManager.LoadScene("Final_Build");
+            SceneManager.LoadScene("_Vertical_Slice_Scene");
         }
         else if(this.transform.name == "Options Button")
         {
