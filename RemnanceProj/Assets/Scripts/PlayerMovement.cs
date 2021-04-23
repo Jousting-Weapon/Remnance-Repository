@@ -30,6 +30,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = 24;
+        }
+        else
+        {
+            speed = 12;
+        }
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(!isPaused)

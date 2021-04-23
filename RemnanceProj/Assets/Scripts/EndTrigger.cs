@@ -2,7 +2,12 @@
 
 public class EndTrigger : MonoBehaviour
 {
-    public GameManager gameManager;
+    GameManager gameManager;
+
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     void OnTriggerEnter()
     {

@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/_Menu_Scene.unity
     guid: 0d24ee0400916b945a8ce73e73c65f10
   - enabled: 1
-    path: Assets/Scenes/_Vertical_Slice_Scene.unity
-    guid: 2d82ee4b8a08462449642f5221517e52
+    path: Assets/Scenes/_Gold_Master_Scene.unity
+    guid: b50f68937950053468ec1cb4d033f94e
   - enabled: 1
     path: Assets/Scenes/CreditsScene.unity
     guid: ee8abac0b79285747917d4a5786a616a

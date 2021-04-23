@@ -131,6 +131,8 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
+        if (FindObjectOfType<GameManager>() == null)
+            Debug.Log("???");
         // For Animation
         playerArms.SetActive(false);
 
@@ -223,8 +225,8 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I) && !inTutorial)
         {
             TriggerArtifactDialogue();
-        }
-        */
+        }*/
+        
 
         if (waitingForInput && !inTutorial && !inEntrance && !inCave)
         {

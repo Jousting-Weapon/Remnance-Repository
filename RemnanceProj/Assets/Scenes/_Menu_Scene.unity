@@ -1680,7 +1680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startText: {fileID: 2072156232}
-  speed: 100
+  speed: 300
   optionsCutscene: 0
   exitOptionsMenu: 0
   inTransition: 0
