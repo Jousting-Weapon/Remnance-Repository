@@ -19,7 +19,7 @@ public class GuardianSight : MonoBehaviour
     void RaycastCheck()
     {
         Vector3 origin = transform.position;
-        origin.y = origin.y + 3;
+        origin.y = origin.y + 2;
         Vector3 direction = transform.forward;
         float maxDistance = 100f;
 
@@ -38,10 +38,11 @@ public class GuardianSight : MonoBehaviour
 
     void Chasing()
     {
-        agent.speed = 30;
+        agent.speed = 20;
         agent.angularSpeed = 300;
-        //Debug.Log(player.transform.position);
-        agent.destination = player.transform.position;
+        //Debug.Log("player:" + player.transform.position);
+        //agent.destination.y = player.transform.position.y + 2;
+        //Debug.Log("agent:" + agent.destination);
 
     }
 
