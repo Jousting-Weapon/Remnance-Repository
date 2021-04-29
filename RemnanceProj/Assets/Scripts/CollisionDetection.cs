@@ -11,7 +11,6 @@ public class CollisionDetection : MonoBehaviour
     void Awake()
     {
         player = GameObject.Find("First Person Player");
-        
     }
     
     private void OnTriggerEnter(Collider other)
