@@ -10,16 +10,24 @@ public class Patrolling : MonoBehaviour
     int current;
     private NavMeshAgent agent;
 
+    private GuardianSight GuardianSight;
+
    void Awake()
    {
        agent = GetComponent<NavMeshAgent>();
        //Debug.Log(agent);
        current = 0;
        agent.speed = 10;
+       GuardianSight = GetComponent<GuardianSight>();
    }
 
    void Update()
    {
+       if (GuardianSight.isChasing)
+       {
+           return;
+       }
+       
        agent.destination = points[current].position;
        //Debug.Log(agent.transform.position);
        if (Mathf.Abs(Vector3.Distance(agent.transform.position, points[current].position)) < 1)

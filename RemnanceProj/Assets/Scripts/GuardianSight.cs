@@ -40,9 +40,7 @@ public class GuardianSight : MonoBehaviour
     {
         agent.speed = 20;
         agent.angularSpeed = 300;
-        //Debug.Log("player:" + player.transform.position);
-        //agent.destination.y = player.transform.position.y + 2;
-        //Debug.Log("agent:" + agent.destination);
+        agent.destination = player.transform.position;
 
     }
 
