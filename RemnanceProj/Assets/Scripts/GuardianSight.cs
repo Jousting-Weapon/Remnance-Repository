@@ -9,11 +9,13 @@ public class GuardianSight : MonoBehaviour
     public bool isChasing = false;
     public NavMeshAgent agent;
     public GameObject player;
+    public Patrolling Patrolling;
     
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("First Person Player");
+        Patrolling = GetComponent<Patrolling>();
     }
 
     void RaycastCheck()
@@ -38,7 +40,7 @@ public class GuardianSight : MonoBehaviour
 
     void Chasing()
     {
-        agent.speed = 20;
+        agent.speed = 30;
         agent.angularSpeed = 300;
         agent.destination = player.transform.position;
 
@@ -51,6 +53,14 @@ public class GuardianSight : MonoBehaviour
         if (isChasing)
         {
             Chasing();
+        }
+
+        if (Mathf.Abs(Vector3.Distance(agent.transform.position, player.transform.position)) > 70)
+        {
+            isChasing = false;
+            agent.speed = 10;
+            Patrolling.Patrol();
+
         }
     } 
 

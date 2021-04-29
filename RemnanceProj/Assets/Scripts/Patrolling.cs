@@ -15,10 +15,19 @@ public class Patrolling : MonoBehaviour
    void Awake()
    {
        agent = GetComponent<NavMeshAgent>();
-       //Debug.Log(agent);
        current = 0;
        agent.speed = 10;
        GuardianSight = GetComponent<GuardianSight>();
+   }
+
+   public void Patrol()
+   {
+       agent.destination = points[current].position;
+       if (Mathf.Abs(Vector3.Distance(agent.transform.position, points[current].position)) < 1)
+        {
+           current = (current + 1) % points.Length;
+           agent.destination = points[current].position;
+        }
    }
 
    void Update()
@@ -27,14 +36,14 @@ public class Patrolling : MonoBehaviour
        {
            return;
        }
+
+       Patrol();
        
-       agent.destination = points[current].position;
-       //Debug.Log(agent.transform.position);
-       if (Mathf.Abs(Vector3.Distance(agent.transform.position, points[current].position)) < 1)
-        {
-           current = (current + 1) % points.Length;
-           agent.destination = points[current].position;
-           //Debug.Log(agent.transform.position);
-        }
+       //agent.destination = points[current].position;
+       //if (Mathf.Abs(Vector3.Distance(agent.transform.position, points[current].position)) < 1)
+        //{
+        //   current = (current + 1) % points.Length;
+        //   agent.destination = points[current].position;
+        //}
    }
 }
