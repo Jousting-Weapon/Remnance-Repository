@@ -64,6 +64,9 @@ public class DialogueManager : MonoBehaviour
 
     public bool finalItemVisible;
 
+    private Vector3 oldBackgroundPos, newBackgroundPosition;
+    private float oldTime;
+
     /// <summary>
     /// A dictionary whose keys are the indexes of the choices and whose values are the number of lines before it
     /// </summary>
@@ -159,6 +162,9 @@ public class DialogueManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Time.timeScale == 0)
+            return;
+
         if (!doneFading)
         {
             alphaFadeValue = Mathf.Clamp01(alphaFadeValue - Time.deltaTime / fadeInTime);
@@ -211,6 +217,12 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0)
+            return;
+
+        oldTime += 2 * Time.deltaTime;
+        selectedChoiceBackground.transform.localPosition = Vector3.Lerp(oldBackgroundPos, newBackgroundPosition, oldTime);
+
         /*
         if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
         {
@@ -226,7 +238,7 @@ public class DialogueManager : MonoBehaviour
         {
             TriggerArtifactDialogue();
         }*/
-        
+
 
         if (waitingForInput && !inTutorial && !inEntrance && !inCave)
         {
@@ -547,7 +559,10 @@ public class DialogueManager : MonoBehaviour
 
         if (selectedChoice == -1)
         {
-            selectedChoiceBackground.transform.localPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, closeText.GetComponent<RectTransform>().localPosition.y, 0);
+            //selectedChoiceBackground.transform.localPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, closeText.GetComponent<RectTransform>().localPosition.y, 0);
+            oldBackgroundPos = selectedChoiceBackground.transform.localPosition;
+            newBackgroundPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, closeText.GetComponent<RectTransform>().localPosition.y, 0);
+            oldTime = 0;
 
             selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (int)((closeText.GetComponent<TextMeshProUGUI>().text.Length * charSize) + 2 * selectionBoxPadding + 5));
             selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, closeText.GetComponent<TextMeshProUGUI>().textInfo.lineInfo[0].lineHeight + verticalPadding + 5);
@@ -582,10 +597,14 @@ public class DialogueManager : MonoBehaviour
 
         int tempWidth = (int)(choicesText.GetComponent<RectTransform>().rect.width + 2 * selectionBoxPadding);//(int)((maxLength * charSize) + 2 * selectionBoxPadding);
 
-        selectedChoiceBackground.transform.localPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, choicesText.GetComponent<RectTransform>().localPosition.y - (yOffset) - test * selectedChoice, 0);
+        //iTween.MoveTo(selectedChoiceBackground.gameObject, new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, choicesText.GetComponent<RectTransform>().localPosition.y - (yOffset) - test * selectedChoice, 0), 1);
+        //selectedChoiceBackground.transform.localPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, choicesText.GetComponent<RectTransform>().localPosition.y - (yOffset) - test * selectedChoice, 0);
+        oldBackgroundPos = selectedChoiceBackground.transform.localPosition;
+        newBackgroundPosition = new Vector3(choicesText.GetComponent<RectTransform>().anchoredPosition.x - selectionBoxPadding, choicesText.GetComponent<RectTransform>().localPosition.y - (yOffset) - test * selectedChoice, 0);
+        oldTime = 0;
 
         selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, tempWidth);
-        selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, tempHeight);
+        selectedChoiceBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, tempHeight + 5);
 
         for (; index < choicesText.textInfo.lineInfo[index].length; index++)
         {
@@ -594,8 +613,6 @@ public class DialogueManager : MonoBehaviour
 
         //scrollBar.transform.localPosition = new Vector3(scrollBar.GetComponent<RectTransform>().anchoredPosition.x, choicesText.GetComponent<RectTransform>().localPosition.y + verticalPadding, 0);
         //scrollBar.transform.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scrollHeight + choicesText.textInfo.lineCount * verticalPadding);
-
-        //iTween.MoveTo(textBackground, new Vector3(375, -1 * backgroundHeight * currentChoices[selectedChoiceIndex] + 240, 0), 1);
     }
 
     void DisplayNextSentence()

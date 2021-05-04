@@ -9850,6 +9850,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4612344435418737553, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4801391930527269282, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: speed
       value: 12
@@ -9881,6 +9885,10 @@ PrefabInstance:
     - target: {fileID: 6687789431840336765, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: far clip plane
       value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788134067751952012, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
@@ -30061,7 +30069,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: eb0f3130648e9f34fa6fc017628abe83, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
