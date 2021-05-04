@@ -32,6 +32,7 @@ public static class DialogueAssets
 
     // Audio
     public static readonly AudioClip clip_sandstorm = Resources.Load<AudioClip>("sandstorm_folie");
+    public static readonly AudioClip clip_sandstormLoop = Resources.Load<AudioClip>("clip_sandstormLoop");
     public static readonly AudioClip clip_intro_ramp = Resources.Load<AudioClip>("Remnance_-_Scene_-_01_-_Clip_-_01");
 
     public static readonly AudioClip clip_tutorial_initial_P1 = Resources.Load<AudioClip>("Remnance_-_Scene_-_01_-_Clip_-_02");

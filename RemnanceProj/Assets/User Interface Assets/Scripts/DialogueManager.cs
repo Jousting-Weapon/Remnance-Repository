@@ -723,6 +723,14 @@ public class DialogueManager : MonoBehaviour
         selectedChoice = 0;
         currentNode = CreateSiteEntranceDialogueTree();
 
+        // Play the looping sandstorm audio
+        AudioSource source3 = gameObject.AddComponent<AudioSource>();
+        source3.volume = 0.05f;
+        source3.loop = true;
+        source3.clip = DialogueAssets.clip_sandstormLoop;
+        source3.outputAudioMixerGroup = masterMixer;
+        source3.Play();
+
         // Animation Logic
         armAnimator.SetBool("InComms", false);
     }
