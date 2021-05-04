@@ -26,6 +26,8 @@ public class Menu : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
 
         audioSource.GetComponent<AudioSource>().outputAudioMixerGroup = masterMixer;
+
+        SetFullscreen(true);
     }
 
     public void Start()
@@ -75,6 +77,11 @@ public class Menu : MonoBehaviour
     public void SetFullscreen(bool isFullscreen) 
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+    public void ChangeResolution()
+    {
+        Screen.SetResolution(resolutions[resolutionDropDown.GetComponent<TMP_Dropdown>().value].width, resolutions[resolutionDropDown.GetComponent<TMP_Dropdown>().value].height, Screen.fullScreenMode);
     }
 
 }

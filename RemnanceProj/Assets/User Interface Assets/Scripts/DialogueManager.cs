@@ -156,8 +156,6 @@ public class DialogueManager : MonoBehaviour
 
         maxCharsPerLine = (int)(choicesText.gameObject.GetComponent<RectTransform>().rect.width / charSize) + 2; // make slightly longer
         selectionBoxPadding = 15;
-
-        Debug.Log("Press: Y for site entrance, U for cave entrance, I for artifact picture... Press WASD to 'pick up' artifact for now");
     }
 
     void FixedUpdate()
