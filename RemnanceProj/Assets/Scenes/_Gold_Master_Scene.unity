@@ -20203,7 +20203,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credits
+  m_Text: Remnance - Credits
 --- !u!222 &992565415
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -39070,7 +39070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2064885108
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39195,8 +39195,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 118}
-  m_SizeDelta: {x: 526.0719, y: 245.92029}
+  m_AnchoredPosition: {x: 0, y: 62}
+  m_SizeDelta: {x: 526.0719, y: 8000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2068277220
 MonoBehaviour:
@@ -39231,13 +39231,84 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'test 1
+  m_Text: 'Created By:
 
-    test 2
+    Nick Boles - Modeling, Animation, Voice Acting - Handler
 
-    test 3
+    Harrison
+    Brown - Level Design, Narrative Design
 
-    test 4'
+    Doris Hu - Technical Art, User Interface
+    Design
+
+    Stefan McGee - Engineering (Gameplay Programming)
+
+    Lance Tallman
+    - Production, Narrative Design, Writing, Audio Engineering, User Interface Design
+
+    Natalie
+    Winsor - Engineering (AI Pathing & Detection)
+
+
+    With Help From:
+
+    Mikaila
+    Burgin - Voice Acting - Trekker
+
+    Ross DiCaprio - Engineering (User Interface
+    & Dialogue Implementation)
+
+    Devyn Whatley - User Research
+
+
+    Sounds Used:
+
+    "Large
+    Hydraulic Door" - Nooly - Freesound.org
+
+    "Man Descending Ship Metal Ramp
+    Port" - Vialluri - Freesound.org
+
+    "Walkie Talkie On/Off" - cs2975871 - Freesound.org
+
+    "Sand
+    Storm" - gallifreyanbuccaneer - Freesound.org
+
+    "Piano/Synth & Drums - (90bpm)"
+    - Erokia - Freesound.org
+
+    "bd_bodacious.wav" - DWSD - Freesound.org
+
+    "Zg_hat_01.wav"
+    - zgump - Freesound.org
+
+    "snare 2.aif" - hookhead - Freesound.org
+
+    "Driven
+    Snare" - eryps - Freesound.org
+
+    "Gas Bottle Perc1" - oddsamples - Freesound.org
+
+    "kick_gettinglaid.wav"
+    - DWSD - Freesound.org
+
+    "harder kick hat odd timing 120bpm-04.wav" - @realdavidfloat
+    - Freesound.org
+
+    "80s Hat" - Hard3eat - Freesound.org
+
+    "Snare 03.wav"
+    - zgump - Freesound.org
+
+    "Electronic Closed High Hat #1" - IanStarGem - Freesound.org
+
+    "Punchy
+    Trance Kick 2" - waveplay - Freesound.org
+
+    "snare" - ojirio - Freesound.org
+
+    "snare14.wav"
+    - altemark - Freesound.org'
 --- !u!222 &2068277221
 CanvasRenderer:
   m_ObjectHideFlags: 0
