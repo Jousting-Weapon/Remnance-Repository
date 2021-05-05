@@ -64,7 +64,7 @@ public class DialogueManager : MonoBehaviour
 
     public bool finalItemVisible;
 
-    private Vector3 oldBackgroundPos, newBackgroundPosition;
+    private Vector3 oldBackgroundPos = new Vector3(-115, 15, 0), newBackgroundPosition = new Vector3(-115, 15, 0);
     private float oldTime;
 
     /// <summary>
@@ -87,6 +87,7 @@ public class DialogueManager : MonoBehaviour
 
         dialogChoicesTransform = transform.GetChild(2);
         selectedChoiceBackground = dialogChoicesTransform.GetChild(0);
+        selectedChoiceBackground.position = new Vector3(-115, 15, 0);
         choicesText = dialogChoicesTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
         choicesText.text = "";
         //scrollBar = dialogChoicesTransform.GetChild(2).GetComponent<Scrollbar>();
@@ -161,7 +162,14 @@ public class DialogueManager : MonoBehaviour
     void FixedUpdate()
     {
         if (Time.timeScale == 0)
+        {
+            audioSource.Pause();
             return;
+        }
+        else
+        {
+            audioSource.UnPause();
+        }
 
         if (!doneFading)
         {
@@ -216,27 +224,17 @@ public class DialogueManager : MonoBehaviour
     void Update()
     {
         if (Time.timeScale == 0)
+        {
+            audioSource.Pause();
             return;
+        }
+        else 
+        {
+            audioSource.UnPause();
+        }
 
         oldTime += 2 * Time.deltaTime;
         selectedChoiceBackground.transform.localPosition = Vector3.Lerp(oldBackgroundPos, newBackgroundPosition, oldTime);
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Y) && !inTutorial)
-        {
-            TriggerSiteEntrance();
-        }
-
-        if (Input.GetKeyDown(KeyCode.U) && !inTutorial)
-        {
-            TriggerCaveEntrance();
-        }
-
-        if (Input.GetKeyDown(KeyCode.I) && !inTutorial)
-        {
-            TriggerArtifactDialogue();
-        }*/
-
 
         if (waitingForInput && !inTutorial && !inEntrance && !inCave)
         {
@@ -377,6 +375,7 @@ public class DialogueManager : MonoBehaviour
             {
                 playerArms.SetActive(true);
                 pictureCamera.SetActive(false);
+                
                 dialogChoicesTransform.gameObject.SetActive(true);
                 isWristCommActive = true;
 
@@ -624,19 +623,19 @@ public class DialogueManager : MonoBehaviour
             gameDisplayText.text = temp.Item1;
             requiredInput = temp.Item2;
 
-            choices = node.GetChoices();
-
-            if (choices == null)
+            if (node.GetChoices() == null)
             {
                 dialogChoicesTransform.gameObject.SetActive(false);
                 isWristCommActive = false;
-                choices = new string[0];
+                //choices = new string[0];
 
                 // Animation Logic
                 armAnimator.SetBool("InComms", false);
             }
             else
             {
+                choices = node.GetChoices();
+
                 if (choices.Length == 1 && choices[0] == "")
                 {
                     dialogChoicesTransform.gameObject.SetActive(false);
@@ -771,6 +770,9 @@ public class DialogueManager : MonoBehaviour
 
     public void TriggerArtifactDialogue()
     {
+        selectedChoiceBackground.position = new Vector3(-115, 15, 0);
+        oldBackgroundPos = new Vector3(-115, 15, 0);
+        newBackgroundPosition = new Vector3(-115, 15, 0);
         explorationChoices.Clear();
         dialogChoicesTransform.gameObject.SetActive(false);
         waitingForInput = false;
