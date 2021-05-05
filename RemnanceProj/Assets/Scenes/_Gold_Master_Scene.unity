@@ -6583,6 +6583,38 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5759428262107602204, guid: 7a751512faa147c49ba9a0999f2380c5, type: 3}
+--- !u!1 &350805255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 350805256}
+  m_Layer: 0
+  m_Name: Credit Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &350805256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350805255}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -52.18858, y: 435.58136, z: -18.38506}
+  m_LocalScale: {x: 0.7598948, y: 0.7598948, z: 0.7598948}
+  m_Children:
+  - {fileID: 992565413}
+  - {fileID: 2068277219}
+  m_Father: {fileID: 2064885108}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &351819711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20293,16 +20325,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992565412}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 24.194214}
+  m_LocalScale: {x: 1.3159716, y: 1.3159716, z: 1.3159716}
   m_Children: []
-  m_Father: {fileID: 2064885108}
+  m_Father: {fileID: 350805256}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076294, y: 209}
+  m_AnchoredPosition: {x: 68.67871, y: -352.1294}
   m_SizeDelta: {x: 426.7981, y: 213.65631}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &992565414
@@ -20321,14 +20353,14 @@ MonoBehaviour:
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 45
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 100
@@ -20338,7 +20370,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Remnance - Credits
+  m_Text: Remnance
 --- !u!222 &992565415
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -39217,8 +39249,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2195122, y: 1.2195122, z: 1.2195122}
   m_Children:
-  - {fileID: 992565413}
-  - {fileID: 2068277219}
+  - {fileID: 350805256}
   m_Father: {fileID: 1885703744}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -39321,18 +39352,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068277218}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 24.194214}
+  m_LocalScale: {x: 1.3159716, y: 1.3159716, z: 1.3159716}
   m_Children: []
-  m_Father: {fileID: 2064885108}
+  m_Father: {fileID: 350805256}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 62}
-  m_SizeDelta: {x: 526.0719, y: 8000}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -457.71002, y: -2121.8198}
+  m_SizeDelta: {x: 801, y: 1300}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &2068277220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39360,7 +39391,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 100
-    m_Alignment: 4
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
