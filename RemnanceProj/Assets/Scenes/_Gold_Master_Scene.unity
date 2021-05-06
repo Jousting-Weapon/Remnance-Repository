@@ -342,7 +342,7 @@ MonoBehaviour:
   fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyle: 0
   fontColor: {r: 1, g: 1, b: 1, a: 1}
-  itemDescription: Toot Toot
+  itemDescription: Used to relay different types of information long distances
   textSizeDesc: 32
   fontTypeDesc: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyleDesc: 0
@@ -1255,7 +1255,7 @@ MonoBehaviour:
   fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyle: 0
   fontColor: {r: 1, g: 1, b: 1, a: 1}
-  itemDescription: ThingyMerBober
+  itemDescription: No known information on object, recover for more testing
   textSizeDesc: 32
   fontTypeDesc: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyleDesc: 0
@@ -1633,9 +1633,7 @@ MonoBehaviour:
   fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyle: 0
   fontColor: {r: 1, g: 1, b: 1, a: 1}
-  itemDescription: 'Vase that looked like it held a lot of water over time
-
-'
+  itemDescription: Decorative piece used ot hold plants, mainly flowers
   textSizeDesc: 32
   fontTypeDesc: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyleDesc: 0
@@ -4868,14 +4866,15 @@ MonoBehaviour:
   zoomSensitivity: 0.1
   horizontalSpeed: 5
   verticalSpeed: 5
-  showHighlight: 0
-  _UIType: 0
-  itemName: 
+  showHighlight: 1
+  _UIType: 1
+  itemName: Idol
   textSize: 40
-  fontType: {fileID: 0}
+  fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   fontStyle: 0
   fontColor: {r: 1, g: 1, b: 1, a: 1}
-  itemDescription: 
+  itemDescription: Seems to be a replica of a figure, also appear  important to the
+    civilization
   textSizeDesc: 32
   fontTypeDesc: {fileID: 0}
   fontStyleDesc: 0
@@ -21417,7 +21416,7 @@ MonoBehaviour:
   fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyle: 0
   fontColor: {r: 1, g: 1, b: 1, a: 1}
-  itemDescription: Weapon of mass destrucion in the years of 1000 B.C
+  itemDescription: Large weapon that is used in combat
   textSizeDesc: 32
   fontTypeDesc: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyleDesc: 0
@@ -26768,12 +26767,13 @@ MonoBehaviour:
   _UIType: 1
   itemName: Knife
   textSize: 40
-  fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
+  fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   fontStyle: 0
   fontColor: {r: 1, g: 1, b: 1, a: 1}
-  itemDescription: Used in preparing food
+  itemDescription: Kitchen utensil used to cut different foods, however this one
+    appears larger than normal ones
   textSizeDesc: 32
-  fontTypeDesc: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
+  fontTypeDesc: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   fontStyleDesc: 0
   fontColorDesc: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &931477287 stripped
@@ -34499,7 +34499,8 @@ MonoBehaviour:
   fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyle: 0
   fontColor: {r: 1, g: 1, b: 1, a: 1}
-  itemDescription: globe
+  itemDescription: A model of a planet, yet it does not appear to be a model of Halcian
+    III
   textSizeDesc: 32
   fontTypeDesc: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyleDesc: 0
@@ -37352,7 +37353,7 @@ MonoBehaviour:
   fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyle: 0
   fontColor: {r: 1, g: 1, b: 1, a: 1}
-  itemDescription: famrin
+  itemDescription: Usually a farming too, it appears this one has been used in combat
   textSizeDesc: 32
   fontTypeDesc: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
   fontStyleDesc: 0
