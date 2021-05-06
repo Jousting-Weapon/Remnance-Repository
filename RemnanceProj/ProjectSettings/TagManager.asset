@@ -13,6 +13,7 @@ TagManager:
   - Point
   - ItemName
   - PictureCamera
+  - Guardian
   layers:
   - Default
   - TransparentFX
