@@ -13508,19 +13508,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4591060178720232411, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.0060706
+      value: 373.2
       objectReference: {fileID: 0}
     - target: {fileID: 4591060178720232411, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -33.481144
+      value: 22.81
       objectReference: {fileID: 0}
     - target: {fileID: 4591060178720232411, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 960.5061
+      value: -880.7
       objectReference: {fileID: 0}
     - target: {fileID: 4591060178720232411, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99971616
+      value: 0.59615695
       objectReference: {fileID: 0}
     - target: {fileID: 4591060178720232411, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: m_LocalRotation.x
@@ -13528,7 +13528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4591060178720232411, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.02382817
+      value: -0.8028679
       objectReference: {fileID: 0}
     - target: {fileID: 4591060178720232411, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: m_LocalRotation.z
@@ -13540,7 +13540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4591060178720232411, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -2.731
+      value: -106.81
       objectReference: {fileID: 0}
     - target: {fileID: 4591060178720232411, guid: b5601db9ec4e3394c9bafc38e2c5c424, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -15648,6 +15648,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1652768174}
     m_Modifications:
+    - target: {fileID: 1316705407200655597, guid: d5a763fe60cba2d48a1be6eff11dae60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7463808982260101949, guid: d5a763fe60cba2d48a1be6eff11dae60, type: 3}
       propertyPath: m_Name
       value: SandFloors_Model
@@ -20310,7 +20314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &729032746
 Transform:
   m_ObjectHideFlags: 0
