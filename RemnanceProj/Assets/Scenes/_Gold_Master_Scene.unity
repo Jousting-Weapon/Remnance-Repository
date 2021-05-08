@@ -1194,7 +1194,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9cc79b067e6a24048b7959f817546907, type: 3}
       propertyPath: m_Name
-      value: cube
+      value: FinalCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9cc79b067e6a24048b7959f817546907, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963035160312945046, guid: 9cc79b067e6a24048b7959f817546907, type: 3}
+      propertyPath: m_Name
+      value: FinalCube
       objectReference: {fileID: 0}
     - target: {fileID: 1963035160312945046, guid: 9cc79b067e6a24048b7959f817546907, type: 3}
       propertyPath: m_Layer
@@ -4031,6 +4039,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8147105233051467475, guid: f02134e49b5c1e344ad706c67e8c9266, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147105233051467475, guid: f02134e49b5c1e344ad706c67e8c9266, type: 3}
+      propertyPath: m_TagString
+      value: Pickup
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f02134e49b5c1e344ad706c67e8c9266, type: 3}
 --- !u!1 &153991524
@@ -4833,11 +4849,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8914060418287651631, guid: 08dacd72fec3c8041a10f4b970ea91c0, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8914060418287651631, guid: 08dacd72fec3c8041a10f4b970ea91c0, type: 3}
       propertyPath: m_TagString
-      value: Pickup
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08dacd72fec3c8041a10f4b970ea91c0, type: 3}
@@ -4846,39 +4862,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8914060418287651631, guid: 08dacd72fec3c8041a10f4b970ea91c0, type: 3}
   m_PrefabInstance: {fileID: 179820254}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &179820256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179820255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41d2a3b9475148f4e983d738be7e114c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 507800095}
-  examinePoint: {fileID: 507800094}
-  initialRotationOffset: {x: 0, y: 0, z: 0}
-  initialZoom: 1
-  zoomRange: {x: 10, y: 4}
-  zoomSensitivity: 0.1
-  horizontalSpeed: 5
-  verticalSpeed: 5
-  showHighlight: 1
-  _UIType: 1
-  itemName: Idol
-  textSize: 40
-  fontType: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  fontStyle: 0
-  fontColor: {r: 1, g: 1, b: 1, a: 1}
-  itemDescription: Seems to be a replica of a figure, also appear  important to the
-    civilization
-  textSizeDesc: 32
-  fontTypeDesc: {fileID: 0}
-  fontStyleDesc: 0
-  fontColorDesc: {r: 1, g: 1, b: 1, a: 1}
 --- !u!65 &179820257
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13741,6 +13724,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1652768174}
     m_Modifications:
+    - target: {fileID: -8767424149964891559, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -13805,14 +13792,38 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 15695c7121d48fe42b0ffe4c7314673b, type: 2}
+    - target: {fileID: -7387700211241838384, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -4919781271889006055, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ce4facbc2952b60469455b101dc0244e, type: 2}
+    - target: {fileID: -4680566820163676890, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4281369853675889729, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4132814143271023173, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -3774221036074896522, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f5da0b80103e3eb40a223c7a19ae91eb, type: 2}
+    - target: {fileID: -2764355561983714351, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -1374963775823474452, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -590628668473816732, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.983757
@@ -13853,6 +13864,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Temple_Model
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3328874532390116848, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -13865,10 +13880,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 15695c7121d48fe42b0ffe4c7314673b, type: 2}
+    - target: {fileID: 7337592768752062574, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7499629496514487787, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 15695c7121d48fe42b0ffe4c7314673b, type: 2}
+    - target: {fileID: 8555046904898354361, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54ff23b46711c094ca7f426ee490ea60, type: 3}
 --- !u!1 &515890337 stripped
@@ -55921,84 +55944,24 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Created By:
-
-    Nick Boles - Modeling, Animation, Voice Acting - Handler
-
-    Harrison
-    Brown - Level Design, Narrative Design
-
-    Doris Hu - Technical Art, User Interface
-    Design
-
-    Stefan McGee - Engineering (Gameplay Programming)
-
-    Lance Tallman
-    - Production, Narrative Design, Writing, Audio Engineering, User Interface Design
-
-    Natalie
-    Winsor - Engineering (AI Pathing & Detection)
-
-
-    With Help From:
-
-    Mikaila
-    Burgin - Voice Acting - Trekker
-
-    Ross DiCaprio - Engineering (User Interface
-    & Dialogue Implementation)
-
-    Devyn Whatley - User Research
-
-
-    Sounds Used:
-
-    "Large
-    Hydraulic Door" - Nooly - Freesound.org
-
-    "Man Descending Ship Metal Ramp
-    Port" - Vialluri - Freesound.org
-
-    "Walkie Talkie On/Off" - cs2975871 - Freesound.org
-
-    "Sand
-    Storm" - gallifreyanbuccaneer - Freesound.org
-
-    "Piano/Synth & Drums - (90bpm)"
-    - Erokia - Freesound.org
-
-    "bd_bodacious.wav" - DWSD - Freesound.org
-
-    "Zg_hat_01.wav"
-    - zgump - Freesound.org
-
-    "snare 2.aif" - hookhead - Freesound.org
-
-    "Driven
-    Snare" - eryps - Freesound.org
-
-    "Gas Bottle Perc1" - oddsamples - Freesound.org
-
-    "kick_gettinglaid.wav"
-    - DWSD - Freesound.org
-
-    "harder kick hat odd timing 120bpm-04.wav" - @realdavidfloat
-    - Freesound.org
-
-    "80s Hat" - Hard3eat - Freesound.org
-
-    "Snare 03.wav"
-    - zgump - Freesound.org
-
-    "Electronic Closed High Hat #1" - IanStarGem - Freesound.org
-
-    "Punchy
-    Trance Kick 2" - waveplay - Freesound.org
-
-    "snare" - ojirio - Freesound.org
-
-    "snare14.wav"
-    - altemark - Freesound.org'
+  m_Text: "Created By:\nNick Boles - Modeling, Animation, Voice Acting - Handler\nHarrison
+    Brown - Level Design, Narrative Design\nDoris Hu - Technical Art, User Interface
+    Design\nStefan McGee - Engineering (Gameplay Programming)\nLance Tallman - Production,
+    Narrative Design, Writing,\n Audio Engineering, User Interface Design\nNatalie
+    Winsor - Engineering (AI Pathing & Detection)\n\nWith Help From:\nMikaila Burgin
+    - Voice Acting - Trekker\nRoss DiCaprio - Engineering (User Interface \n& Dialogue
+    Implementation)\nDevyn Whatley - User Research\n\nSounds Used:\n\"Large Hydraulic
+    Door\" - Nooly - Freesound.org\n\"Man Descending Ship Metal Ramp Port\" - Vialluri
+    - Freesound.org\n\"Walkie Talkie On/Off\" - cs2975871 - Freesound.org\n\"Sand
+    Storm\" - gallifreyanbuccaneer - Freesound.org\n\"Piano/Synth & Drums - (90bpm)\"
+    - Erokia - Freesound.org\n\"bd_bodacious.wav\" - DWSD - Freesound.org\n\"Zg_hat_01.wav\"
+    - zgump - Freesound.org\n\"snare 2.aif\" - hookhead - Freesound.org\n\"Driven
+    Snare\" - eryps - Freesound.org\n\"Gas Bottle Perc1\" - oddsamples - Freesound.org\n\"kick_gettinglaid.wav\"
+    - DWSD - Freesound.org\n\"harder kick hat odd timing 120bpm-04.wav\" - @realdavidfloat
+    - Freesound.org\n\"80s Hat\" - Hard3eat - Freesound.org\n\"Snare 03.wav\" - zgump
+    - Freesound.org\n\"Electronic Closed High Hat #1\" - IanStarGem - Freesound.org\n\"Punchy
+    Trance Kick 2\" - waveplay - Freesound.org\n\"snare\" - ojirio - Freesound.org\n\"snare14.wav\"
+    - altemark - Freesound.org"
 --- !u!222 &2068277221
 CanvasRenderer:
   m_ObjectHideFlags: 0
