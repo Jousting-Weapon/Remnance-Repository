@@ -65,7 +65,7 @@ public static class DialogueAssets
     #region SiteEntrance
     public static readonly string[] subtitle_entrance_1 = { "PLAYER: Alright...I think I've reached RS1.", "HANDLER: Great." };
     public static readonly string[] subtitle_entrance_2 = { "PLAYER: This place looks far worse than what those preliminary photos depicted.", "PLAYER: Did we ever recover those probes?", "HANDLER: That...that is a great question.  I...I have no idea." };
-    public static readonly string[] subtitle_entrance_3 = { "PLAYER: You're in a state-of-the-art relay booth and you can't tell me if a few probes are still online?", "HANDLER: Well I-", "PLAYER: You know what, it doesn't even matter. Do we have any idea where the artifact is located?" };
+    public static readonly string[] subtitle_entrance_3 = { "PLAYER: You're in a state-of-the-art relay booth and you can't tell me if a few probes are still online?", "HANDLER: Well I-", "PLAYER: You know what, it doesn't matter. Do we have any idea where the artifact is located?" };
     public static readonly string[] subtitle_entrance_4 = { "HANDLER: Yes! Well...I can give you a general location at the very least.", "HANDLER: Site 1 is completely isolated from Sites 2 and 3. You see those mountains around you?" };
     public static readonly string[] subtitle_entrance_5 = { "PLAYER: ...I can't see 20 feet in front of me, let alone some mountains 'in the distance.'", "HANDLER: Right. Forgot about that. Well suffice to say, the artifact is somewhere in this valley." };
     public static readonly string[] subtitle_entrance_6 = { "PLAYER: Great. Thanks for all your help.", "HANDLER: Anytime. You know where to find me." };
@@ -93,7 +93,7 @@ public static class DialogueAssets
 
     public static readonly string[] subtitle_exploration_tree_1_c1 = { "PLAYER: The briefing said there were no other sentients on Halcian III. What are those things?", "HANDLER: The briefing said there were no other organics on Halcian III. Those \"robots\" that you're either hearing or seeing float around, those are Relic Guardians", "HANDLER: I'm surprised you haven't seen any on other assignments. One of the teams on H2 said they ran into a ton of them." };
     public static readonly string[] choice_exploration_tree_2 = { "Are they dangerous?", "Is there any way to shut them down?" };
-    public static readonly string[] subtitle_exploration_tree_2_c1 = { "PLAYER: Are they...dangerous?", "HANDLER: Oh absolutely. That team on H2 said they ran into them. As in past tense.", "HANDLER: There's a reason I'm not down there with you. Sorry. I probably should have mentioned that earlier.", "PLAYER: Ya think?" };
+    public static readonly string[] subtitle_exploration_tree_2_c1 = { "PLAYER: Are they...dangerous?", "HANDLER: Oh absolutely. The last team on H2 came back with a quarter of its members.", "HANDLER: There's a reason I'm not down there with you. Sorry. I probably should have mentioned that earlier.", "PLAYER: Ya think?" };
     public static readonly string[] subtitle_exploration_tree_2_c2_a = { "PLAYER: Is there anyway to shut them down or disable them?", "HANDLER: With what, your camera? Unless you're carrying some contraband I don't know about, which is saying something because I have access to literally every piece of equipment you're wearing, that sounds like a terrible plan." };
     public static readonly string[] subtitle_exploration_tree_2_c2_b = { "PLAYER: I don't see you coming up with any better ideas.", "HANDLER: Well, I'm not the one down there, unarmed mind you, trying to pick a fight with a bunch of alien robots.", "PLAYER: Evidently." };
 
@@ -146,7 +146,7 @@ public static class DialogueAssets
 
     public static readonly string[] subtitle_cave_tree_1_c1 = { "PLAYER: Any idea if those Relic Guardians are in here?", "HANDLER: No idea. And until the interference from this sandstorm goes away I'm not gonna be able to tell you.", "PLAYER: Okay. Very helpful as always.", "HANDLER: Of course. It's what I'm here for."};
     public static readonly string[] subtitle_cave_tree_1_c2a = { "PLAYER: Have you ever been in the field?", "HANDLER: Hahaha...wait, are you being serious right now?", "PLAYER: I was trying to be.", "HANDLER: Oh. Well in that case, no. No I've never been deployed before." };
-    public static readonly string[] subtitle_cave_tree_1_c2b = { "HANDLER: The 'dream' of being an overworked Trekker was lost on me.", "PLAYER: Ouch.", "HANDLER: Hey, you asked. Besides, I get paid just as much as you do, and I don't ever have to set foot on some dusty planet.", "PLAYER: So you're only in it for the credits.", "HANDLER: Are you not?" };
+    public static readonly string[] subtitle_cave_tree_1_c2b = { "HANDLER: The 'dream' of being an overworked Trekker was lost on me.", "PLAYER: Ouch.", "HANDLER: Hey, you asked. Besides, I get paid just as much as you do, and I don't ever have to set foot on some dusty planet.", "PLAYER: You make just as much as me?!", "HANDLER: Uhh, you find that relic yet?" };
 
     // Audio
     public static readonly AudioClip clip_cave_1 = Resources.Load<AudioClip>("CaveScene/Remnance_Scene_4_Clip_1");
@@ -183,7 +183,7 @@ public static class DialogueAssets
     public static readonly string[] subtitle_artifact_tree_1_c_1 = { "PLAYER: Not gonna happen." };
     public static readonly string[] subtitle_artifact_tree_1_c_2 = { "PLAYER: Fine. But I'm not happy about this." };
 
-    public static readonly string[] subtitle_artifact_tree_1_c1_a = { "HANDLER: Okay well let me tell you how this is gonna go then. I'm the only one who has startup access to your lander.", "HANDLER: Ergo, you can't leave without me. Now I hate to play the bad guy, but both of our asses are on the line if you, yes you, don't pick up that old relic." };
+    public static readonly string[] subtitle_artifact_tree_1_c1_a = { "HANDLER: Okay well let me tell you how this is gonna go then. I'm the only one who has startup access to your lander.", "HANDLER: Ergo, you can't leave without me. Now I hate to play the bad guy, but if you don't come back with that, it's my ass too." };
     public static readonly string[] subtitle_artifact_tree_1_c2_a = { "HANDLER: You don't have to be happy about it, just grab it." };
     public static readonly string[] substitle_artifact_tree_1_c2_b = { "PLAYER: Okay, I have it." };
 
